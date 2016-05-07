@@ -1,0 +1,46 @@
+{% load i18n mezzanine_tags comment_tags rating_tags %}
+
+{% for comment in comments_for_thread %}
+
+<li id="comment-{{ comment.id }}"
+	class="comment media{% if comment.by_author %} comment-author{% endif %}">
+	<div class="avatar">
+			<img src="{% gravatar_url comment.email %}" width="68" height="68" alt="" />
+	</div>
+	<div class="comment_right">
+		<div class="comment_right">
+			<div class="comment_info">
+				{% trans "Posted by" %}
+				<a href="{{ comment.url}}">{{ comment.user_name }}</a> 
+				<span>|</span> 
+				{% blocktrans with sometime=comment.submit_date|timesince %}{{ sometime }} ago{% endblocktrans %}
+				<span>|</span> 
+				<a href="#reply-{{ comment.id }}">{% trans "Reply" %}</a>
+			</div>
+			<p>{{ comment.comment|comment_filter }}</p>
+		</div>
+	</div>
+	<div class="clear"></div>
+</li>
+	
+	<form class="comment-reply-form" method="post" id="reply-{{ comment.id }}"
+		action="{{ comment_url }}#reply-{{ comment.id }}"
+		{% if replied_to != comment.id %}style="display:none;"{% endif %}>
+		{% if replied_to == comment.id %}
+		{% fields_for posted_comment_form %}
+		{% else %}
+		{% fields_for unposted_comment_form %}
+		{% endif %}
+		<input type="hidden" name="replied_to" value="{{ comment.id }}">
+		<input class="btn btn-primary btn-lg" type="submit" value="{% trans "Reply" %}">
+	</form>
+
+	{% comment_thread comment %}
+
+{% endfor %}
+
+{% if no_comments %}
+<p>{% trans "There are currently no comments" %}</p>
+{% endif %}
+
+

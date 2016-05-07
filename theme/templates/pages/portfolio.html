@@ -1,0 +1,93 @@
+{% extends "pages/page.html" %}
+
+{% load i18n mezzanine_tags staticfiles %}
+
+{% block extra_js %}
+<script src="{% static 'js/jquery.isotope.min.js' %}" type="text/javascript"></script>
+<script type="text/javascript" src="{% static 'js/sorting.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.preloader.js' %}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//prettyPhoto
+		$("a[rel^='prettyPhoto']").prettyPhoto();
+		
+		//Image hover
+		$(".hover_img").live('mouseover',function(){
+				var info=$(this).find("img");
+				info.stop().animate({opacity:0.6},500);
+				$(".preloader").css({'background':'none'});
+			}
+		);
+		$(".hover_img").live('mouseout',function(){
+				var info=$(this).find("img");
+				info.stop().animate({opacity:1},500);
+				$(".preloader").css({'background':'none'});
+			}
+		);	
+		// Preloader
+		$(".projects .element").preloader();	
+						
+	});
+</script>
+<script src="{% static 'js/application.js' %}"></script>
+{% endblock %}
+
+{% block all_content %}
+
+<div class="page_container">
+
+	<!--MAIN CONTENT AREA-->
+	<div class="wrap">
+		<div class="container inner_content">
+			<div id="options">
+				{% if categories %}
+				<ul id="filters" class="option-set" data-option-key="filter">
+					<li><a href="#filter" data-option-value="*" class="btn dark_btn selected">{% trans "All" %}</a></li>
+					{% for category in categories %}
+					<li>
+						<a href="{{ category.url }}" data-option-value=".{{ category.title|slugify }}" class="btn dark_btn">
+							{{ category.title }}
+						</a>
+					</li>                                            
+					{% endfor %}
+				</ul> 
+				{% endif %}                                          
+				<div class="clear"></div>
+				<div class="row">
+					<div class="span12">
+						{{ page.portfolio.content|safe }}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- portfolio_block -->
+				<div class="projects">
+				{% if items %}
+					{% for item in items %}
+					<div class="span{{ page.portfolio.columns }} element {% for c in item.categories.all %}{{c|slugify}} {% endfor %}" 
+						 data-category="{% for c in item.categories.all %}{{c|slugify}} {% endfor %}">
+						<div class="hover_img">
+							<img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 570 285 %}" alt="" />
+							<span class="portfolio_zoom">
+								<a href="{{ MEDIA_URL }}{{ item.featured_image }}" rel="prettyPhoto[portfolio1]"></a>
+							</span>
+							<span class="portfolio_link"><a href="{{ item.get_absolute_url }}"></a></span>
+						</div> 
+						<div class="item_description">
+							<h6><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h6>
+							<div class="descr">{{ item.short_description|safe }}</div>
+						</div>                                    
+					</div>
+					{% endfor %}
+				{% else %}
+					<div class="span12">{% trans "Wow, there is like... nothing here. That's embarassing." %}
+				{% endif %}
+					<div class="clear"></div>
+				</div>   
+				<!-- //portfolio_block -->   
+			</div>
+		</div>
+	</div>
+	<!--//MAIN CONTENT AREA-->
+
+{% endblock %}

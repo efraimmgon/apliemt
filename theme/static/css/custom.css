@@ -1,0 +1,15 @@
+.logo a {
+	font-size: 50px;
+	font-weight: 400;
+	line-height: 92px;
+	text-transform: uppercase;
+}
+
+#footer .foot_logo a {
+	color: #444;
+	font-size: 50px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 67px;
+	text-transform: uppercase;
+}

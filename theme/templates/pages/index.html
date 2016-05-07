@@ -1,0 +1,136 @@
+{% extends "pages/page.html" %}
+
+{% load i18n staticfiles mezzanine_tags blog_tags %}
+
+{% block all_content %}
+<div class="page_container">
+
+{% if page.homepage.slides.all %}
+<!--slider-->
+<div id="main_slider">
+	<div class="camera_wrap" id="camera_wrap_1">
+		{% for slide in page.homepage.slides.all %}
+		<div data-src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %}"></div>
+		{% endfor %}
+	</div><!-- #camera_wrap_1 -->
+	<div class="clear"></div>
+</div>
+<!--//slider-->
+{% endif %}
+
+{% if page.homepage.blurbs.all %}			   
+<!--planning-->
+<div class="wrap planning">
+	<div class="container">
+		<div class="row">
+			{% for icon in page.homepage.blurbs.all %}
+			<div class="span3">
+				<a href="{{ icon.link }}">
+					<i class="home_icon {{ icon.icon }}"></i>
+					<span class="link_title">{{ icon.title }}</span>
+					{{ icon.content }}
+				</a>
+			</div>
+			{% endfor %}                        
+		</div>
+	</div>
+</div>
+<!--//planning-->
+{% endif %}
+
+{% if page.homepage.heading or page.homepage.subheading %}
+<!--Welcome-->
+<div class="wrap block">
+	<div class="container welcome_block">
+		<div class="welcome_line welcome_t"></div>
+	{% editable page.homepage.heading page.homepage.subheading %}
+		{{ page.homepage.heading }}
+		<span>{{ page.homepage.subheading }}</span>
+	{% endeditable %}
+		<div class="welcome_line welcome_b"></div>
+	</div>
+</div>
+<!--//Welcome-->
+{% endif %}       
+
+{% if items %}
+<!--featured works-->
+<div class="wrap block carousel_block">
+	<div class="container">
+		<h2 class="upper">{{ page.homepage.featured_works_heading }}</h2>
+		<div class="row">
+			<div class="span12">
+				<ul id="mycarousel" class="jcarousel-skin-tango">
+				{% for item in items %}
+					<li>
+						<div class="hover_img">
+							<a href="{{ item.href }}" rel="prettyPhoto[portfolio1]">
+								<img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 270 228 %}" alt="" />
+								<span class="portfolio_zoom1"></span>
+							</a>                                    
+						</div>
+					</li>
+				{% endfor %}
+				</ul>                         
+			</div>                
+		</div>                
+	</div>
+</div>        
+<!--//featured works-->
+{% endif %}
+
+{% if page.homepage.content_heading or page.homepage.content_content %}
+<!--ABOUT US-->
+<div class="wrap block">
+	<div class="container">
+		<div class="row news_block">
+			<div class="span12">
+			{% editable page.homepage.content_heading page.homepage.content_content %}
+				<h2 class="title">{{ page.homepage.content_heading }}</h2>
+				{{ page.homepage.content_content|safe }}
+			{% endeditable %}
+			</div>           
+		</div>
+	</div>
+</div>
+<!--ABOUT US-->
+{% endif %}
+
+<!--latest posts-->
+<div class="wrap block carousel_block">
+	<div class="container">
+		<h2 class="upper">{% trans "Latest Posts" %}</h2>
+		<div class="row">
+			<div class="span12">
+				<ul id="mycarousel2" class="jcarousel-skin-tango">
+					{% blog_recent_posts 4 as recent_posts %}
+					{% for blog_post in recent_posts %}
+					<li>
+						<div class="post_carousel">
+							{% if blog_post.featured_image %}
+							<a href="{{ blog_post.get_absolute_url }}">
+								<img src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 720 505 %}" alt="" />
+							</a>
+							{% endif %}
+							<div class="title_t"><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></div>
+							<div class="post_meta">
+								{% trans "Posted by" %}
+								<a href="{% url 'blog_post_list_author' blog_post.user ">{{ blog_post.user }}</a>
+								  /  {{ blog_post.publish_date }}
+							</div>
+							{% editable blog_post.content %}
+								{{ blog_post.description_from_content|safe }}
+							{% endeditable %}
+							<a href="{{ blog_post.get_absolute_url }}" class="arrow_link">{% trans "Read more" %}</a>
+						</div>  
+					</li>
+					{% endfor %}                                                                          
+				</ul>                        
+			</div>                
+		</div>                
+	</div>
+</div>        
+<!--//latest posts--> 
+
+</div>
+{% endblock %}

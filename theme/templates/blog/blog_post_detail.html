@@ -1,0 +1,64 @@
+{% extends "blog/blog_post_list.html" %}
+{% load mezzanine_tags comment_tags keyword_tags rating_tags i18n disqus_tags %}
+
+{% block meta_title %}{{ blog_post.meta_title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for blog_post as tags %}
+{% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ blog_post.description }}
+{% endmetablock %}{% endblock %}
+
+{% block main %}
+<div class="post">
+	<img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 770 550 %}">
+	<div class="post_info">
+		<div class="fleft">
+			{% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %} /
+			{% trans "By" %}
+			{% with blog_post.user as author %}
+			<a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+			{% endwith %}
+			/ {% trans "Tags" %}:
+			{% keywords_for blog_post as tags %}
+			{% if tags %}
+				{% spaceless %}
+				{% for tag in tags %}
+					<a href="{% url "blog_post_list_tag" tag.slug %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+				{% endfor %}
+				{% endspaceless %}
+			{% endif %}
+		</div>
+		<div class="fright">
+			{% if blog_post.allow_comments %}
+				{% if settings.COMMENTS_DISQUS_SHORTNAME %}
+					<a href="{{ blog_post.get_absolute_url }}#disqus_thread"
+						data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
+						{% trans "Comments" %}
+					{% endspaceless %}</a>
+				{% else %}<a href="#comments">{% spaceless %}
+					{% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
+					{% endspaceless %}</a>
+				{% endif %}
+			{% endif %}
+		</div>
+		<div class="clear"></div>
+	</div>
+	{% editable blog_post.content %}
+	{{ blog_post.content|richtext_filters|safe }}
+	{% endeditable %}
+</div>
+
+<div id="comments">
+	<h4>
+		{% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
+	</h4>
+	<ul>
+		{% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
+	</ul>
+</div>
+
+{% endblock %}
