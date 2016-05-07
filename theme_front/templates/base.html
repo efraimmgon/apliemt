@@ -139,7 +139,7 @@
                     <div class="row">
                         <div class="span5">
                             <div class="foot_logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>    
-                            <div class="copyright">&copy; {% now "Y" %} APLIEMT. {% trans "All Rights Reserved." %}</div>                        
+                            <div class="copyright">&copy; {% now "Y" %} APLIEMT. {% trans "All rights reserved." %}</div>                        
                         </div>
                         <div class="span7">
                             <div class="foot_right_block">
@@ -147,6 +147,9 @@
                                     <form action="{% url 'search' %}" method="get">
                                         <input class="inp_search" name="q" type="text" value="{% trans 'Search the Site' %}" onfocus="if (this.value == '{% trans 'Search the Site' %}') this.value = '';" onblur="if (this.value == '') this.value = '{% trans 'Search the Site' %}';" />                                        
                                     </form>
+                                    {% nevercache %}
+                                    {% include "includes/language_selector.html" %}
+                                    {% endnevercache %}
                                 </div>
                                 <div class="follow_us">
                                     <ul>

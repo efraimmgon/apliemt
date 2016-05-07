@@ -86,7 +86,6 @@ BLOG_USE_FEATURED_IMAGE = True
 # INSTALLED_APPS setting.
 USE_MODELTRANSLATION = True
 
-
 ########################
 # MAIN DJANGO SETTINGS #
 ########################
