@@ -84,7 +84,7 @@
         <div class="fleft">
             {% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %} /
             {% with blog_post.user as author %}
-            By <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+            {% trans "By" %} <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
             {% endwith %}
 
             {% keywords_for blog_post as tags %}
@@ -129,7 +129,7 @@
     {{ blog_post.description_from_content|safe }}
     {% endeditable %}
     {% endblock %}    
-    <a href="{{ blog_post.get_absolute_url }}" class="arrow_link">Read more</a>
+    <a href="{{ blog_post.get_absolute_url }}" class="arrow_link">{% trans "Read more" %}</a>
 </div>
 {% endfor %}
 
