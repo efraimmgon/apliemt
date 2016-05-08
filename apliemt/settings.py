@@ -86,6 +86,10 @@ BLOG_USE_FEATURED_IMAGE = True
 # INSTALLED_APPS setting.
 USE_MODELTRANSLATION = True
 
+
+# ACCOUNTS
+ACCOUNTS_PROFILE_VIEWS_ENABLED = True
+
 ########################
 # MAIN DJANGO SETTINGS #
 ########################
@@ -249,7 +253,7 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.galleries",
     "mezzanine.twitter",
-    # "mezzanine.accounts",
+    "mezzanine.accounts",
     # "mezzanine.mobile",
     "theme",
 )

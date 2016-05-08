@@ -55,7 +55,9 @@
 				<div class="clear"></div>
 				<div class="row">
 					<div class="span12">
+						{% editable page.portfolio.content %}
 						{{ page.portfolio.content|safe }}
+						{% endeditable %}
 					</div>
 				</div>
 			</div>
@@ -73,10 +75,12 @@
 							</span>
 							<span class="portfolio_link"><a href="{{ item.get_absolute_url }}"></a></span>
 						</div> 
+						{% editable item.title item.short_description %}
 						<div class="item_description">
 							<h6><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h6>
 							<div class="descr">{{ item.short_description|safe }}</div>
-						</div>                                    
+						</div>
+						{% endeditable %}
 					</div>
 					{% endfor %}
 				{% else %}

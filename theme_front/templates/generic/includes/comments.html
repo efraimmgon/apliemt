@@ -1,5 +1,5 @@
 {% load i18n mezzanine_tags comment_tags %}
-<div id="comments">
+
 {% if settings.COMMENTS_DISQUS_SHORTNAME %}
 {% include "generic/includes/disqus_comments.html" %}
 {% else %}
@@ -23,4 +23,3 @@ $(function() {
     <input class="btn send_btn" type="submit" value="{% trans "Comment" %}">
 </form>
 {% endif %}
-</div>

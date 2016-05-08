@@ -3,6 +3,7 @@
 {% load i18n mezzanine_tags %}
 
 {% block main %}
+
 {% with portfolioitem.images.all as portfolio_images %}
 {% if portfolio_images %}
 <div id="portfolio_carousel" class="carousel slide">
@@ -19,15 +20,18 @@
 {% endif %}
 {% endwith %}
 
+{% editable page.portfolioitem.content %}
 {{ page.portfolioitem.content|safe }}
+{% endeditable %}
 
-<br>{{ page.portfolioitem.parent.get_absolute_url }}
 {% endblock %}
 
 
 {% block right_panel %}
 
+{% editable page.portfolioitem.short_description %}
 {{ portfolioitem.short_description|safe }}
+{% endeditable %}
 <hr />
 
 {% with portfolioitem.categories.all as categories %}

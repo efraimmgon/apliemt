@@ -659,7 +659,7 @@ ul.tweets li {
 }
 
 .breadcrumb {
-  padding-top: 10px;
+  padding: 19px 0;
   margin: 0 0 20px 0;
   list-style: none;
   background:#d1d1d1;
@@ -974,8 +974,8 @@ ul.recent_post li {
 	list-style:none;
 }
 #comments li {
-	padding:0 0 23px 0;
-	list-style:none;
+	padding:0 0 23px;
+	list-style: outside none none;
 }
 .avatar {
 	float:left;
@@ -998,6 +998,21 @@ ul.recent_post li {
 	padding:23px 0 0 30px;
 	margin:0;
 }
+
+#comments ul li ul li {
+	padding:23px 0 0 30px;
+	margin:0;
+}
+
+.comment-author {
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  margin-bottom: 30px;
+  background-color: #FEFFEE;
+}
+
 #map {
 	margin:0 0 15px 0;
 	padding-top:6px;
@@ -1025,7 +1040,10 @@ ul.recent_post li {
     text-align: center;
 }
 
-
+#mycarousel {
+	margin-left: auto;
+	margin-right: auto;
+}
 
 
 

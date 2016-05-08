@@ -1,42 +1,74 @@
 {% load i18n mezzanine_tags comment_tags rating_tags %}
 
 {% for comment in comments_for_thread %}
-
+<ul>
 <li id="comment-{{ comment.id }}"
-	class="comment media{% if comment.by_author %} comment-author{% endif %}">
+	class="{% if comment.by_author %} comment-author{% endif %}">
+
+{% editable comment.is_public comment.is_removed %}
+	{% if not comment.is_removed and comment.is_public or request.user.is_staff %}
+	{% if comment.url %}
 	<div class="avatar">
-			<img src="{% gravatar_url comment.email %}" width="68" height="68" alt="" />
+			<a href="{{ comment.url }}">
+				<img src="{% gravatar_url comment.email %}" alt="" />
+			</a>
 	</div>
 	<div class="comment_right">
-		<div class="comment_right">
 			<div class="comment_info">
 				{% trans "Posted by" %}
 				<a href="{{ comment.url}}">{{ comment.user_name }}</a> 
+	{% else %}
+	<div class="avatar">
+			<img src="{% gravatar_url comment.email %}" alt="" />
+	</div>
+	<div class="comment_right">
+			<div class="comment_info">
+				{% trans "Posted by" %}
+				{{ comment.user_name }}
+	{% endif %}
 				<span>|</span> 
 				{% blocktrans with sometime=comment.submit_date|timesince %}{{ sometime }} ago{% endblocktrans %}
-				<span>|</span> 
-				<a href="#reply-{{ comment.id }}">{% trans "Reply" %}</a>
 			</div>
 			<p>{{ comment.comment|comment_filter }}</p>
-		</div>
+	{% endif %}
+
+			{% if not comment.is_removed and comment.is_public %}
+			<a class="reply" href="#reply-{{ comment.id }}">{% trans "Reply" %}</a>
+			<form class="comment-reply-form" method="post" id="reply-{{ comment.id }}"
+				action="{{ comment_url }}#reply-{{ comment.id }}"
+				{% if replied_to != comment.id %}style="display:none;"{% endif %}>
+				{% if replied_to == comment.id %}
+				{% fields_for posted_comment_form %}
+				{% else %}
+				{% fields_for unposted_comment_form %}
+				{% endif %}
+				<input type="hidden" name="replied_to" value="{{ comment.id }}">
+				<input class="btn send_btn" type="submit" value="{% trans "Reply" %}">
+			</form>
+			{% else %}
+			<p>
+				{% if comment.is_removed %}
+				<span class="glyphicon glyphicon-remove-circle"></span> {% trans "Comment deleted" %}
+		        {% else %}
+		        <span class="glyphicon glyphicon-warning-sign"></span> {% trans "Comment awaiting approval" %}
+		        {% endif %}
+		        <small class="timespan">{% blocktrans with sometime=comment.submit_date|timesince %}{{ sometime }} ago{% endblocktrans %}</small>
+		    </p>
+		    {% endif %}
+		    {# if not comment.is_removed and comment.is_public #}
+
+{% if not comment.is_removed and comment.is_public or request.user.is_staff %}
 	</div>
+	<!-- .comment_right -->
 	<div class="clear"></div>
-</li>
-	
-	<form class="comment-reply-form" method="post" id="reply-{{ comment.id }}"
-		action="{{ comment_url }}#reply-{{ comment.id }}"
-		{% if replied_to != comment.id %}style="display:none;"{% endif %}>
-		{% if replied_to == comment.id %}
-		{% fields_for posted_comment_form %}
-		{% else %}
-		{% fields_for unposted_comment_form %}
-		{% endif %}
-		<input type="hidden" name="replied_to" value="{{ comment.id }}">
-		<input class="btn btn-primary btn-lg" type="submit" value="{% trans "Reply" %}">
-	</form>
 
 	{% comment_thread comment %}
 
+{% endif %}
+{% endeditable %}
+
+</li>
+</ul>
 {% endfor %}
 
 {% if no_comments %}

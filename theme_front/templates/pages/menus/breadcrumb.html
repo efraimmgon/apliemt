@@ -1,24 +1,19 @@
 {% load i18n pages_tags %}
 
 {% if on_home %}
-<li>{% trans "Home" %}</li>
+<span>{% trans "Home" %}</span>
 {% else %}
 {% for page in page_branch %}
 
     {% if not has_home and page.is_primary and forloop.first %}
-    <li>
-        <a href="{% url "home" %}">{% trans "Home" %}</a>
-    </li>
+    <a href="{% url "home" %}">{% trans "Home" %}</a>
     {% endif %}
 
     {% if page.is_current_or_ascendant %}
     {% if page.is_current %}
-    <li
-        class="active">{{ page.title }}</li>
+        {{ page.title }}
     {% else %}
-    <li>
-        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
-    </li>
+        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a><span>/</span>
     {% endif %}
     {% if page.has_children %}{% page_menu page %}{% endif %}
     {% endif %}

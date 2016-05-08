@@ -3,6 +3,11 @@
 
 {% block meta_title %}{{ blog_post.meta_title }}{% endblock %}
 
+{% block breadcrumbs %}
+{{ block.super }}
+{{ blog_post.title }}
+{% endblock %}
+
 {% block meta_keywords %}{% metablock %}
 {% keywords_for blog_post as tags %}
 {% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
@@ -14,7 +19,9 @@
 
 {% block main %}
 <div class="post">
+	{% if blog_post.featured_image %}
 	<img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 770 550 %}">
+	{% endif %}
 	<div class="post_info">
 		<div class="fleft">
 			{% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %} /
@@ -22,9 +29,9 @@
 			{% with blog_post.user as author %}
 			<a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
 			{% endwith %}
-			/ {% trans "Tags" %}:
 			{% keywords_for blog_post as tags %}
 			{% if tags %}
+				/ {% trans "Tags" %}:
 				{% spaceless %}
 				{% for tag in tags %}
 					<a href="{% url "blog_post_list_tag" tag.slug %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
@@ -56,9 +63,7 @@
 	<h4>
 		{% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
 	</h4>
-	<ul>
-		{% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
-	</ul>
+	{% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
 </div>
 
 {% endblock %}

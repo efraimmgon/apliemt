@@ -57,18 +57,21 @@
 <!--featured works-->
 <div class="wrap block carousel_block">
 	<div class="container">
+		{% editable page.homepage.featured_works_heading %}
 		<h2 class="upper">{{ page.homepage.featured_works_heading }}</h2>
+		{% endeditable %}
 		<div class="row">
 			<div class="span12">
 				<ul id="mycarousel" class="jcarousel-skin-tango">
 				{% for item in items %}
 					<li>
 						<div class="hover_img">
-							<a href="{{ item.href }}" rel="prettyPhoto[portfolio1]">
+							<a href="{{ item.get_absolute_url }}">
 								<img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 270 228 %}" alt="" />
 								<span class="portfolio_zoom1"></span>
 							</a>                                    
 						</div>
+						<center><strong>{{ item.title }}</strong></center>
 					</li>
 				{% endfor %}
 				</ul>                         
