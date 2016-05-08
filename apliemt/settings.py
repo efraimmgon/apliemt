@@ -86,10 +86,6 @@ BLOG_USE_FEATURED_IMAGE = True
 # INSTALLED_APPS setting.
 USE_MODELTRANSLATION = True
 
-
-# ACCOUNTS
-ACCOUNTS_PROFILE_VIEWS_ENABLED = True
-
 ########################
 # MAIN DJANGO SETTINGS #
 ########################
@@ -244,6 +240,7 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.staticfiles",
+    "links",
     "mezzanine.boot",
     "mezzanine.conf",
     "mezzanine.core",
@@ -303,6 +300,25 @@ OPTIONAL_APPS = (
     PACKAGE_NAME_FILEBROWSER,
     PACKAGE_NAME_GRAPPELLI,
 )
+
+########
+# DRUM #
+########
+
+# Drum-specific Mezzanine settings
+AUTH_PROFILE_MODULE = "links.Profile"
+RATINGS_RANGE = (-1, 1)
+RATINGS_ACCOUNT_REQUIRED = True
+COMMENTS_ACCOUNT_REQUIRED = True
+ACCOUNTS_PROFILE_VIEWS_ENABLED = True
+#SEARCH_MODEL_CHOICES = ("links.Link",)
+
+# Drum settings
+ALLOWED_DUPLICATE_LINK_HOURS = 24 * 7 * 3
+ITEMS_PER_PAGE = 20
+LINK_REQUIRED = False
+AUTO_TAG = True
+
 
 ##################
 # LOCAL SETTINGS #
