@@ -1,4 +1,4 @@
-{% load i18n pages_tags %}
+{% load i18n pages_tags future mezzanine_tags drum_tags %}
 {% spaceless %}
 {% if page_branch_in_menu %}
 
@@ -19,7 +19,8 @@
         {% if page.has_children_in_menu %}{% page_menu page %}{% endif %}
     </li>
     {% endif %}
-    {% endfor %}                                
+    {% endfor %}
+    {% include "user_panel.html" %}
 </ul>
 {% else %}
 <ul>
@@ -32,6 +33,7 @@
     </li>
     {% endif %}
     {% endfor %}
+    {% include "user_panel.html" %}
 </ul>
 {% endif %}
 

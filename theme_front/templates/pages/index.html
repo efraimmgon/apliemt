@@ -102,7 +102,9 @@
 <!--latest posts-->
 <div class="wrap block carousel_block">
 	<div class="container">
-		<h2 class="upper">{% trans "Latest Posts" %}</h2>
+		{% editable page.homepage.latest_posts_heading %}
+		<h2 class="upper">{{ page.homepage.latest_posts_heading }}</h2>
+		{% endeditable %}
 		<div class="row">
 			<div class="span12">
 				<ul id="mycarousel2" class="jcarousel-skin-tango">
