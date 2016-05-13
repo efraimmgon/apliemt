@@ -1,0 +1,367 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-13 12:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: apliemt/settings.py:46
+msgid "Top navigation bar"
+msgstr ""
+
+#: apliemt/settings.py:47
+msgid "Footer"
+msgstr ""
+
+#: apliemt/settings.py:115
+msgid "Brazilian Portuguese"
+msgstr "Português"
+
+#: apliemt/settings.py:116
+msgid "English"
+msgstr "Inglês"
+
+#: links/templates/accounts/account_profile.html:11
+msgid "Update profile"
+msgstr "Atualizar perfil"
+
+#: links/templates/accounts/account_profile.html:21
+msgid "Website"
+msgstr ""
+
+#: links/templates/accounts/account_profile.html:25
+msgid "comments"
+msgstr "comentários"
+
+#: links/templates/accounts/includes/user_panel_nav.html:8
+#: theme_front/templates/user_panel.html:7
+msgid "Log out"
+msgstr "Sair"
+
+#: links/templates/accounts/includes/user_panel_nav.html:11
+#: theme_front/templates/user_panel.html:13
+msgid "Log in"
+msgstr "Entrar"
+
+#: links/templates/accounts/includes/user_panel_nav.html:13
+#: theme_front/templates/user_panel.html:18
+msgid "Sign up"
+msgstr "Registrar"
+
+#: links/templates/generic/includes/drum_comment.html:10
+#: links/templates/links/link_detail.html:18
+msgid "ago"
+msgstr "atrás"
+
+#: links/templates/generic/includes/drum_comment.html:17
+msgid "reply"
+msgstr "responder"
+
+#: links/templates/generic/includes/drum_comment.html:27
+#: theme_front/templates/generic/includes/comment.html:36
+#: theme_front/templates/generic/includes/comment.html:46
+msgid "Reply"
+msgstr "Responder"
+
+#: links/templates/generic/includes/drum_comment.html:34
+msgid "Deleted"
+msgstr "Deletado"
+
+#: links/templates/generic/includes/drum_comment.html:42
+msgid "No comments yet"
+msgstr "Nenhum comentário ainda"
+
+#: links/templates/generic/includes/drum_comments.html:3
+#: links/templates/links_/base.html:55
+#: theme_front/templates/blog/blog_post_detail.html:47
+#: theme_front/templates/blog/blog_post_list.html:91
+msgid "Comments"
+msgstr "Comentários"
+
+#: links/templates/generic/includes/drum_comments.html:17
+msgid "New Comment"
+msgstr "Novo Comentário"
+
+#: links/templates/generic/includes/drum_comments.html:25
+#: theme_front/templates/generic/includes/comments.html:23
+msgid "Comment"
+msgstr "Comentar"
+
+#: links/templates/generic/threadedcomment_list.html:14
+#: links/templates/links/link_detail.html:17
+msgid "by"
+msgstr "por"
+
+#: links/templates/generic/threadedcomment_list.html:16
+msgid "ago in"
+msgstr "atrás em"
+
+#: links/templates/includes/pagination.html:8
+msgid "Page"
+msgstr ""
+
+#: links/templates/includes/pagination.html:8
+msgid "of"
+msgstr "de"
+
+#: links/templates/includes/search_form.html:4
+msgid "Search"
+msgstr "Buscar"
+
+#: links/templates/includes/search_form.html:11
+msgid "Everything"
+msgstr "Tudo"
+
+#: links/templates/includes/search_form.html:22
+msgid "Go"
+msgstr "Ir"
+
+#: links/templates/links/link_form.html:3
+#: links/templates/links/link_form.html:4 links/templates/links_/base.html:61
+msgid "New Link"
+msgstr "Novo Link"
+
+#: links/templates/links/link_form.html:13
+msgid "Submit New Link"
+msgstr "Enviar Novo Link"
+
+#: links/templates/links_/base.html:54
+msgid "Newest"
+msgstr "Recentes"
+
+#: links/templates/links_/base.html:56
+msgid "Best"
+msgstr "Melhores"
+
+#: links/templates/links_/base.html:57
+#: theme_front/templates/blog/blog_post_detail.html:34
+#: theme_front/templates/blog/blog_post_list.html:71
+#: theme_front/templates/blog/includes/filter_panel.html:68
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: links/templates/links_/base.html:100
+msgid "Powered by"
+msgstr "Distribuído por"
+
+#: theme/defaults.py:18
+msgid "Facebook link"
+msgstr ""
+
+#: theme/defaults.py:19
+msgid "If present a Facebook icon linking here will be in the header"
+msgstr ""
+
+#: theme/defaults.py:27
+msgid "Vimeo link"
+msgstr ""
+
+#: theme/defaults.py:28
+msgid "If present a Vimeo icon linking here will be in the header"
+msgstr ""
+
+#: theme/defaults.py:36
+msgid "Tumbrl link"
+msgstr ""
+
+#: theme/defaults.py:37
+msgid "If present a Tumbrl icon linking here will be in the header"
+msgstr ""
+
+#: theme/defaults.py:45
+msgid "Twitter link"
+msgstr ""
+
+#: theme/defaults.py:46
+msgid "If present a Twitter icon linking here will be in the header"
+msgstr ""
+
+#: theme/defaults.py:54
+msgid "Delicious link"
+msgstr ""
+
+#: theme/defaults.py:55
+msgid "If present a Delicious icon linking here will be in the header"
+msgstr ""
+
+#: theme/models.py:29
+msgid "Home page"
+msgstr "Página inicial"
+
+#: theme/models.py:30
+msgid "Home pages"
+msgstr "Páginas iniciais"
+
+#: theme/models.py:37 theme/models.py:99
+msgid "Image"
+msgstr "Imagem"
+
+#: theme/models.py:68
+msgid "Portfolio"
+msgstr "Portfólio"
+
+#: theme/models.py:69
+msgid "Portfolios"
+msgstr "Portfólios"
+
+#: theme/models.py:75
+msgid "Featured Image"
+msgstr "Imagem de destaque"
+
+#: theme/models.py:80 theme_front/templates/blog/blog_post_list.html.py:80
+#: theme_front/templates/blog/includes/filter_panel.html:51
+#: theme_front/templates/pages/portfolioitem.html:39
+msgid "Categories"
+msgstr "Categorias"
+
+#: theme/models.py:87
+msgid "Portfolio item"
+msgstr "Item do portfólio"
+
+#: theme/models.py:88
+msgid "Portfolio items"
+msgstr "Itens do portfólio"
+
+#: theme/models.py:95
+msgid "File"
+msgstr "Arquivo"
+
+#: theme/models.py:100
+msgid "Images"
+msgstr "Imagens"
+
+#: theme/models.py:107
+msgid "Portfolio Item Category"
+msgstr "Categoria do Item do Portfólio"
+
+#: theme/models.py:108
+msgid "Portfolio Item Categories"
+msgstr "Categorias dos Itens do Portfólio"
+
+#: theme_front/templates/base.html:152
+msgid "All rights reserved."
+msgstr "Todos os direitos reservados."
+
+#: theme_front/templates/base.html:159
+msgid "Search the Site"
+msgstr "Busque o site"
+
+#: theme_front/templates/blog/blog_post_detail.html:27
+#: theme_front/templates/blog/blog_post_list.html:63
+#: theme_front/templates/generic/includes/comment.html:30
+#: theme_front/templates/generic/includes/comment.html:55
+#, python-format
+msgid "%(sometime)s ago"
+msgstr "%(sometime)s atrás"
+
+#: theme_front/templates/blog/blog_post_detail.html:28
+#: theme_front/templates/blog/blog_post_list.html:65
+msgid "By"
+msgstr "Por"
+
+#: theme_front/templates/blog/blog_post_detail.html:50
+#: theme_front/templates/blog/blog_post_detail.html:64
+#: theme_front/templates/blog/blog_post_list.html:95
+#, python-format
+msgid "%(comments_count)s comment"
+msgid_plural "%(comments_count)s comments"
+msgstr[0] "%(comments_count)s comentário"
+msgstr[1] "%(comments_count)s comentários"
+
+#: theme_front/templates/blog/blog_post_list.html:4
+msgid "Blog"
+msgstr "Blog"
+
+#: theme_front/templates/blog/blog_post_list.html:24
+msgid "Viewing posts tagged"
+msgstr "Vendo postagens com a etiqueta"
+
+#: theme_front/templates/blog/blog_post_list.html:26
+msgid "Viewing posts for the category"
+msgstr "Vendo postagens da categoria"
+
+#: theme_front/templates/blog/blog_post_list.html:28
+msgid "Viewing posts from"
+msgstr "Vendo postagens de"
+
+#: theme_front/templates/blog/blog_post_list.html:31
+msgid "Viewing posts by"
+msgstr "Vendo postagens por"
+
+#: theme_front/templates/blog/blog_post_list.html:110
+#: theme_front/templates/pages/index.html:129
+msgid "Read more"
+msgstr "Ler mais"
+
+#: theme_front/templates/blog/includes/filter_panel.html:8
+msgid "Recent Posts"
+msgstr "Postagens Recentes"
+
+#: theme_front/templates/blog/includes/filter_panel.html:31
+msgid "Archive"
+msgstr "Arquivo"
+
+#: theme_front/templates/blog/includes/filter_panel.html:88
+msgid "Authors"
+msgstr "Autores"
+
+#: theme_front/templates/generic/includes/comment.html:18
+#: theme_front/templates/generic/includes/comment.html:26
+#: theme_front/templates/pages/index.html:122
+msgid "Posted by"
+msgstr "Postado por"
+
+#: theme_front/templates/generic/includes/comment.html:51
+msgid "Comment deleted"
+msgstr "Comentário deletado"
+
+#: theme_front/templates/generic/includes/comment.html:53
+msgid "Comment awaiting approval"
+msgstr "Comentário aguardando aprovação"
+
+#: theme_front/templates/generic/includes/comment.html:75
+msgid "There are currently no comments"
+msgstr "Não há comentários"
+
+#: theme_front/templates/generic/includes/comments.html:16
+msgid "Leave a comment"
+msgstr "Deixe um comentário"
+
+#: theme_front/templates/includes/language_selector.html:17
+msgid "Change"
+msgstr "Mudar"
+
+#: theme_front/templates/pages/form.html:23
+msgid "Submit"
+msgstr "Enviar"
+
+#: theme_front/templates/pages/menus/breadcrumb.html:4
+#: theme_front/templates/pages/menus/breadcrumb.html:9
+#: theme_front/templates/pages/menus/dropdown.html:10
+msgid "Home"
+msgstr "Início"
+
+#: theme_front/templates/pages/portfolio.html:45
+msgid "All"
+msgstr "Todos"
+
+#: theme_front/templates/pages/portfolio.html:87
+msgid "Wow, there is like... nothing here. That's embarassing."
+msgstr ""
+
+#: theme_front/templates/pages/portfolioitem.html:50
+msgid "Back to Portfolio"
+msgstr "Voltar ao Portfólio"
