@@ -13,3 +13,8 @@
 	line-height: 67px;
 	text-transform: uppercase;
 }
+
+.inline {
+	display: inline-block;
+	margin: 0;
+}

@@ -27,7 +27,7 @@
 {% endcompress %}
 
 <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->    
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -42,13 +42,13 @@
 <script type="text/javascript" src="{% static 'js/jquery.jcarousel.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/myscript.js' %}"></script>
 <script type="text/javascript">
-    $(document).ready(function(){   
-        //Slider
-        $('#camera_wrap_1').camera();
-        
-        //Featured works & latest posts
-        $('#mycarousel, #mycarousel2, #newscarousel').jcarousel();                                                  
-    });     
+	$(document).ready(function(){   
+		//Slider
+		$('#camera_wrap_1').camera();
+		
+		//Featured works & latest posts
+		$('#mycarousel, #mycarousel2, #newscarousel').jcarousel();                                                  
+	});     
 </script>
 {% block extra_js %}{% endblock %}
 {% endcompress %}
@@ -59,141 +59,125 @@
 
 <body>
 
-    <!--header-->
-    <div class="header">
-        <div class="wrap">
-            <div class="navbar navbar_ clearfix">
-                <div class="container">
-                    <div class="row">
-                        <div class="span4">
-                            <div class="logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>                        
-                        </div>
-                        <div class="span8">
-                            <div class="follow_us">
-                                <ul>
-                                {% if settings.SOCIAL_LINK_FACEBOOK %}
-                                    <li><a target="_blank" href="{{ settings.SOCIAL_LINK_FACEBOOK }}" class="facebook">Facebook</a></li>
-                                {% endif %}
-                                {% if settings.SOCIAL_LINK_VIMEO %}
-                                    <li><a href="{{ settings.SOCIAL_LINK_VIMEO }}" class="vimeo">Vimeo</a></li>
-                                {% endif %}
-                                {% if settings.SOCIAL_LINK_TUMBRL %}
-                                    <li><a href="{{ settings.SOCIAL_LINK_TUMBRL }}" class="tumbrl">Tumbrl</a></li>
-                                {% endif %}
-                                {% if settings.SOCIAL_LINK_TWITTER %}
-                                    <li><a href="{{ settings.SOCIAL_LINK_TWITTER }}" class="twitter">Twitter</a></li>
-                                {% endif %}
-                                {% if settings.SOCIAL_LINK_DELICIOUS %}
-                                    <li><a href="{{ settings.SOCIAL_LINK_DELICIOUS }}" class="delicious">Delicious</a></li>
-                                {% endif %}
-                                </ul>
-                            </div>
-                            <div class="clear"></div>
-                            <nav id="main_menu">
-                                <div class="menu_wrap">
-                                    {% page_menu "pages/menus/dropdown.html" %}
-                                </div>
-                             </nav>                            
-                        </div>
-                    </div>                
-                </div>
-             </div>
-        </div>    
-    </div>
-    <!--//header-->    
+	<!--header-->
+	<div class="header">
+		<div class="wrap">
+			<div class="navbar navbar_ clearfix">
+				<div class="container">
+					<div class="row">
+						<div class="span4">
+							<div class="logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>                        
+						</div>
+						<div class="span8">
+							<div class="follow_us">
+								<ul>
+								{% if settings.SOCIAL_LINK_FACEBOOK %}
+									<li><a target="_blank" href="{{ settings.SOCIAL_LINK_FACEBOOK }}" class="facebook">Facebook</a></li>
+								{% endif %}
+								{% if settings.SOCIAL_LINK_VIMEO %}
+									<li><a href="{{ settings.SOCIAL_LINK_VIMEO }}" class="vimeo">Vimeo</a></li>
+								{% endif %}
+								{% if settings.SOCIAL_LINK_TUMBRL %}
+									<li><a href="{{ settings.SOCIAL_LINK_TUMBRL }}" class="tumbrl">Tumbrl</a></li>
+								{% endif %}
+								{% if settings.SOCIAL_LINK_TWITTER %}
+									<li><a href="{{ settings.SOCIAL_LINK_TWITTER }}" class="twitter">Twitter</a></li>
+								{% endif %}
+								{% if settings.SOCIAL_LINK_DELICIOUS %}
+									<li><a href="{{ settings.SOCIAL_LINK_DELICIOUS }}" class="delicious">Delicious</a></li>
+								{% endif %}
+								</ul>
+							</div>
+							<div class="clear"></div>
+							<nav id="main_menu">
+								<div class="menu_wrap">
+									{% page_menu "pages/menus/dropdown.html" %}
+								</div>
+							 </nav>                            
+						</div>
+					</div>                
+				</div>
+			 </div>
+		</div>    
+	</div>
+	<!--//header-->    
 
 {% block all_content %}
 <!--page_container-->
 <div class="page_container">
 
-    <div class="breadcrumb">
-        <div class="wrap">
-            <div class="container">
-            {% block breadcrumbs %}
-            {% spaceless %}
-            {% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
-            {% endspaceless %}
-            {% endblock %}
-            </div>
-        </div>
-    </div>
+	<div class="breadcrumb">
+		<div class="wrap">
+			<div class="container">
+			{% block breadcrumbs %}
+			{% spaceless %}
+			{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
+			{% endspaceless %}
+			{% endblock %}
+			</div>
+		</div>
+	</div>
 
-    <div class="wrap">
-        <div class="container">
-            <div class="row">
-                {% block main_wrapper %}
-                <div class="span8">
-                    {% block main %}{% endblock %}
-                </div>
-                {% endblock %}
-                {% block right_wrapper %}
-                <div class="span4">
-                    {% block right_panel %}
-                        {% include "blog/includes/filter_panel.html" %}
-                    {% endblock %}
-                </div>
-                {% endblock %}
-            </div>
-        </div>
-    </div>
+	<div class="wrap">
+		<div class="container">
+			<div class="row">
+				{% block main_wrapper %}
+				<div class="span8">
+					{% block main %}{% endblock %}
+				</div>
+				{% endblock %}
+				{% block right_wrapper %}
+				<div class="span4">
+					{% block right_panel %}
+						{% include "blog/includes/filter_panel.html" %}
+					{% endblock %}
+				</div>
+				{% endblock %}
+			</div>
+		</div>
+	</div>
 
 </div>
 <!--//page_container-->
 {% endblock %}
-    
-    <!--footer-->
-    <div id="footer">
-        <div class="footer_bottom">
-            <div class="wrap">
-                <div class="container">
-                    <div class="row">
-                        <div class="span5">
-                            <div class="foot_logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>    
-                            <div class="copyright">&copy; {% now "Y" %} APLIEMT. {% trans "All rights reserved." %}</div>                        
-                        </div>
-                        <div class="span7">
-                            <div class="foot_right_block">
-                                <div class="fright">
-                                    <form action="{% url 'search' %}" method="get">
-                                        <input class="inp_search" name="q" type="text" value="{% trans 'Search the Site' %}" onfocus="if (this.value == '{% trans 'Search the Site' %}') this.value = '';" onblur="if (this.value == '') this.value = '{% trans 'Search the Site' %}';" />                                        
-                                    </form>
-                                    {% nevercache %}
-                                    {% include "includes/language_selector.html" %}
-                                    {% endnevercache %}
-                                </div>
-                                <div class="follow_us">
-                                    <ul>
-                                    {% if settings.SOCIAL_LINK_FACEBOOK %}
-                                        <li><a rel="tooltip" href="{{ settings.SOCIAL_LINK_FACEBOOK }}" title="Facebook" class="facebook">Facebook</a></li>
-                                    {% endif %}
-                                    {% if settings.SOCIAL_LINK_TWITTER %}
-                                        <li><a rel="tooltip" href="{{ settings.SOCIAL_LINK_TWITTER }}" title="Twitter" class="twitter">Twitter</a></li>
-                                    {% endif %}
-                                    {% if settings.SOCIAL_LINK_TUMBRL %}
-                                        <li><a rel="tooltip" href="{{ settings.SOCIAL_LINK_TUMBRL }}" title="Tumbrl" class="tumbrl">Tumbrl</a></li>
-                                    {% endif %}
-                                    {% if settings.SOCIAL_LINK_VIMEO %}
-                                        <li><a rel="tooltip" href="{{ settings.SOCIAL_LINK_VIMEO }}" title="Vimeo" class="vimeo">Vimeo</a></li>
-                                    {% endif %}
-                                    {% if settings.SOCIAL_LINK_DELICIOUS %}
-                                        <li><a rel="tooltip" href="{{ settings.SOCIAL_LINK_DELICIOUS }}" title="Delicious" class="delicious">Delicious</a></li>
-                                    {% endif %}
-                                    </ul>
-                                </div>
-                                <div class="clear"></div>
-                            
-                                <div class="clear"></div>
-                                <div class="foot_menu">
-                                    {% page_menu "pages/menus/footer.html" %}
-                                </div>
-                            </div>                            
-                        </div>
-                    </div>  
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--//footer-->    
+	
+	<!--footer-->
+	<div id="footer">
+		<div class="footer_bottom">
+			<div class="wrap">
+				<div class="container">
+					<div class="row">
+						<div class="span5">
+							<div class="foot_logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>    
+							<div class="copyright">&copy; {% now "Y" %} APLIEMT. {% trans "All rights reserved." %}</div>                        
+						</div>
+						<div class="span7">
+							<div class="foot_right_block">
+								<div>
+									<div class="inline">
+										<form action="{% url 'search' %}" method="get">
+											<input class="inp_search" name="q" type="text" value="{% trans 'Search the Site' %}" onfocus="if (this.value == '{% trans 'Search the Site' %}') this.value = '';" onblur="if (this.value == '') this.value = '{% trans 'Search the Site' %}';" />                                        
+										</form>
+									</div>
+									<div class="inline">
+										{% nevercache %}
+										{% include "includes/language_selector.html" %}
+										{% endnevercache %}
+									</div>
+								</div>
+								<div class="clear"></div>
+							
+								<div class="foot_menu">
+									{% page_menu "pages/menus/footer.html" %}
+								</div>
+							</div>                            
+						</div>
+					</div>  
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--//footer-->    
 
 {% block footer_js %}
 {% include "includes/footer_scripts.html" %}
