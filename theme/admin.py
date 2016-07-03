@@ -14,7 +14,7 @@ class IconBlurbInline(TabularDynamicInlineAdmin):
 	model = IconBlurb
 
 class HomePageAdmin(PageAdmin):
-	inline = (SlideInline, IconBlurbInline)
+	inlines = (SlideInline, IconBlurbInline)
 
 admin.site.register(HomePage, HomePageAdmin)
 admin.site.register(Portfolio, PageAdmin)

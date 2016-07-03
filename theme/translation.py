@@ -1,6 +1,7 @@
 from modeltranslation.translator import translator, TranslationOptions
 from .models import (
-	HomePage, IconBlurb, Portfolio, PortfolioItem, PortfolioItemImage
+	HomePage, IconBlurb, Portfolio, PortfolioItem, PortfolioItemImage,
+	Slide
 )
 
 class TranslatedHomePage(TranslationOptions):
@@ -9,6 +10,9 @@ class TranslatedHomePage(TranslationOptions):
 
 class TranslatedIconBlurb(TranslationOptions):
 	fields = ("title", "content",)
+
+class TranslatedSlide(TranslationOptions):
+	fields = ()
 
 class TranslatedPortfolio(TranslationOptions):
 	fields = ("content",)
@@ -21,6 +25,7 @@ class TranslatedPortfolioItemImage(TranslationOptions):
 
 translator.register(HomePage, TranslatedHomePage)
 translator.register(IconBlurb, TranslatedIconBlurb)
+translator.register(Slide, TranslatedSlide)
 translator.register(Portfolio, TranslatedPortfolio)
 translator.register(PortfolioItem, TranslatedPortfolioItem)
 translator.register(PortfolioItemImage, TranslatedPortfolioItemImage)

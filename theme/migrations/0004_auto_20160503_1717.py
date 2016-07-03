@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('pages', '0003_auto_20150527_1555'),
-        ('sites', '0002_alter_domain_unique'),
+        #('sites', '0002_alter_domain_unique'),
         ('theme', '0003_homepage_content_content'),
     ]
 
