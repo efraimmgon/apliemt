@@ -9,6 +9,8 @@ from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
 from mezzanine.pages.views import page as page_view
 
+from links.urls import urlpatterns as links_urls
+from links.urls import override
 
 admin.autodiscover()
 
@@ -20,7 +22,7 @@ urlpatterns = i18n_patterns(
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
     url("^admin/", include(admin.site.urls)),
-    url("^forum/", include("links.urls")),
+    url("^forum/", include(links_urls)),
 )
 
 if settings.USE_MODELTRANSLATION:
@@ -28,8 +30,7 @@ if settings.USE_MODELTRANSLATION:
         url('^i18n/$', set_language, name='set_language'),
     ]
 
-from links.urls import urlpatterns as links_urls
-urlpatterns += links_urls
+urlpatterns += override
 
 urlpatterns += [
     # We don't want to presume how your homepage works, so here are a

@@ -30,6 +30,7 @@
 
 </div>
 
+{% if profile_user == request.user %}
 <hr />
 
 <div class="container">
@@ -46,15 +47,20 @@
         <h3>
           Informativos
         </h3>
+          {% for info in informativos %}
           <div class="row">
-
-            <div class="span3">
-              P/ a pessoa clicar e abrir outra janela ou expandir.
-            </div>
-            <div class="span3">
-              P/ a pessoa clicar e abrir outra janela ou expandir.
+            <div class="span6">
+              <div class="hover_img">
+                <a class="no-pjax" href="{{ info.get_absolute_url }}">
+                  <img src="{{MEDIA_URL}}{% thumbnail info.featured_image 570 245 %}" alt="" />
+                </a>
+                <center><strong>{{ info.title }}</strong></center>
+              </div>
             </div>
           </div>
+          {% empty %}
+          Não há informativos
+          {% endfor %}
         </div>
 
       <div>
@@ -107,4 +113,5 @@
     </div>
   </div>
 </div>
+{% endif %}
 {% endblock %}

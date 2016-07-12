@@ -233,4 +233,5 @@ def profile(request, username, template="accounts/account_profile.html",
     informativos = PortfolioItem.objects.published(
         for_user=request.user).filter(parent=p)
     context.update({"informativos": informativos})
+    print("INFORMATIVOS:", informativos)
     return TemplateResponse(request, template, context)

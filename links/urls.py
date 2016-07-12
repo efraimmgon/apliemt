@@ -47,9 +47,10 @@ urlpatterns = patterns("",
 ### Overriding the original at mezzanine.accounts
 
 if settings.ACCOUNTS_PROFILE_VIEWS_ENABLED:
-    urlpatterns += [
+    override = [
         url("^%s%s$" % (PROFILE_URL.strip("/"), _slash),
             profile_redirect, name="profile_redirect"),
         url("^%s/(?P<username>.*)%s$" % (PROFILE_URL.strip("/"), _slash),
             profile, name="profile"),
     ]
+    urlpatterns += override
