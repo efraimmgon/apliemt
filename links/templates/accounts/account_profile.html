@@ -12,6 +12,9 @@
 </div>
 {% endif %}
 <div class="clearfix">
+  <h2>
+    Perfil
+  </h2>
 
     {% with profile_user|get_profile as profile %}
     {% if profile.bio %}
@@ -21,9 +24,86 @@
     <p class="bio">{% trans "Website" %}: {{ profile.website|urlize }}</p>
     {% endif %}
     {% endwith %}
-    
+
     <a href="{% url "comment_list_user" profile_user.username %}">{% trans "comments" %} ({{ profile_user.comment_comments.count }})</a> |
     <a href="{% url "link_list_user" profile_user.username %}">links ({{ profile_user.links.published.count }})</a>
 
+</div>
+
+<hr />
+
+<div class="container">
+  <h2>
+    Intranet
+  </h2>
+
+  <div class="row">
+
+    <!-- left -->
+    <div class="span6">
+
+      <div>
+        <h3>
+          Informativos
+        </h3>
+          <div class="row">
+            <div class="span3">
+              P/ a pessoa clicar e abrir outra janela ou expandir.
+            </div>
+            <div class="span3">
+              P/ a pessoa clicar e abrir outra janela ou expandir.
+            </div>
+          </div>
+        </div>
+
+      <div>
+        <h3>
+          Cronograma
+        </h3>
+        <div>
+          Campo de texto p/ incluir tabela, por exemplo.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- right -->
+    <div class="span6">
+
+      <div>
+        <h3>
+          Inscrição XIXEPI
+        </h3>
+        <div>
+          Realizar inscrição como ouvinte.<br />
+          Submeter comunicação. <br/>
+          Enviar comprovante de pagamento. <br />
+          Receber certificado. <br />
+        </div>
+      </div>
+
+      <div>
+        <h3>
+          Trabalhos
+        </h3>
+        <div>
+          Acompanhar Sessão Coordenada. <br />
+          Acompanhar Sessão Individual. <br />
+        </div>
+      </div>
+
+      <div>
+        <h3>
+          ANAIS Eletrônicos
+        </h3>
+        <div>
+          Submeter trabalho. <br />
+          Acompanhar Sub-transmissão. <br />
+          Normas de Publicação. <br />
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 {% endblock %}
