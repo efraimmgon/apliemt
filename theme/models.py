@@ -29,6 +29,7 @@ class HomePage(Page, RichText):
 		verbose_name = _("Home page")
 		verbose_name_plural = _("Home pages")
 
+
 class Slide(Orderable):
 	"""
 	A slide in a slider connected to a HomePage
@@ -37,6 +38,7 @@ class Slide(Orderable):
 	image = FileField(verbose_name=_("Image"),
 		upload_to=upload_to("theme.Slide.image", "slider"),
 		format="Image", max_length=255, null=True, blank=True)
+
 
 class IconBlurb(Orderable):
 	"""
@@ -56,6 +58,7 @@ COLUMNS_CHOICES = (
 	('3', 'Four columns'),  # four columns use span3
 )
 
+
 class Portfolio(Page):
 	"""
 	A collection of individual portfolio items
@@ -67,6 +70,7 @@ class Portfolio(Page):
 	class Meta:
 		verbose_name = _("Portfolio")
 		verbose_name_plural = _("Portfolios")
+
 
 class PortfolioItem(Page, RichText):
 	"""
@@ -87,6 +91,7 @@ class PortfolioItem(Page, RichText):
 		verbose_name = _("Portfolio item")
 		verbose_name_plural = _("Portfolio items")
 
+
 class PortfolioItemImage(Orderable):
 	"""
 	An image for a PortfolioItem
@@ -98,6 +103,7 @@ class PortfolioItemImage(Orderable):
 	class Meta:
 		verbose_name = _("Image")
 		verbose_name_plural = _("Images")
+
 
 class PortfolioItemCategory(Slugged):
 	"""

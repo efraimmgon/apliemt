@@ -9,6 +9,8 @@ from django.contrib.messages import info, error
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.timezone import now
 from django.views.generic import ListView, CreateView, DetailView, TemplateView
+from django.contrib.auth.decorators import login_required
+from django.template.response import TemplateResponse
 
 from mezzanine.accounts import get_profile_model
 from mezzanine.conf import settings
@@ -18,6 +20,11 @@ from mezzanine.utils.views import paginate
 from links.forms import LinkForm
 from links.models import Link
 from links.utils import order_by_score
+
+from theme.models import Portfolio, PortfolioItem
+
+
+
 
 
 # Returns the name to be used for reverse profile lookups from the user
@@ -200,3 +207,30 @@ class CommentList(ScoreOrderingView):
 
 class TagList(TemplateView):
     template_name = "links/tag_list.html"
+
+
+### Overriding the original at mezzanine.accounts
+
+@login_required
+def profile_redirect(request):
+    """
+    Just gives the URL prefix for profiles an action - redirect
+    to the logged in user's profile.
+    """
+    return redirect("profile", username=request.user.username)
+
+
+def profile(request, username, template="accounts/account_profile.html",
+            extra_context=None):
+    """
+    Display a profile.
+    """
+    lookup = {"username__iexact": username, "is_active": True}
+    context = {"profile_user": get_object_or_404(User, **lookup)}
+    context.update(extra_context or {})
+
+    p = Portfolio.objects.get(title="Informativos")
+    informativos = PortfolioItem.objects.published(
+        for_user=request.user).filter(parent=p)
+    context.update({"informativos": informativos})
+    return TemplateResponse(request, template, context)

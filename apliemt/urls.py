@@ -28,6 +28,9 @@ if settings.USE_MODELTRANSLATION:
         url('^i18n/$', set_language, name='set_language'),
     ]
 
+from links.urls import urlpatterns as links_urls
+urlpatterns += links_urls
+
 urlpatterns += [
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.

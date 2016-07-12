@@ -2,9 +2,13 @@ from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
+from mezzanine.conf import settings
 
-from links.views import LinkList, LinkCreate, LinkDetail, CommentList, TagList
+from links.views import (LinkList, LinkCreate, LinkDetail, CommentList, TagList,
+						profile, profile_redirect)
 
+PROFILE_URL = getattr(settings, "PROFILE_URL", "/users/")
+_slash = "/" if settings.APPEND_SLASH else ""
 
 urlpatterns = patterns("",
     url("^$",
@@ -38,3 +42,14 @@ urlpatterns = patterns("",
         LinkList.as_view(),
         name="link_list_tag"),
 )
+
+
+### Overriding the original at mezzanine.accounts
+
+if settings.ACCOUNTS_PROFILE_VIEWS_ENABLED:
+    urlpatterns += [
+        url("^%s%s$" % (PROFILE_URL.strip("/"), _slash),
+            profile_redirect, name="profile_redirect"),
+        url("^%s/(?P<username>.*)%s$" % (PROFILE_URL.strip("/"), _slash),
+            profile, name="profile"),
+    ]

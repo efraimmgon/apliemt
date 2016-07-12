@@ -31,3 +31,4 @@ def home_processor(request, page):
 		for_user=request.user).prefetch_related('categories')
 	items = items.filter(parent=page.homepage.featured_portfolio)
 	return {'items': items}
+
