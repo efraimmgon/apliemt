@@ -67,9 +67,18 @@
         <h3>
           Cronograma
         </h3>
-        <div>
-          Campo de texto p/ incluir tabela, por exemplo.
-        </div>
+        {% for c in cronograma %}
+          <div class="row">
+            <div class="span6">
+              <h4>{{ cronograma.title }}</h4>
+              <div>
+                {{ cronograma.content }}
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          nil
+        {% endfor %}
       </div>
 
     </div>

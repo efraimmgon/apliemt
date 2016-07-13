@@ -229,9 +229,19 @@ def profile(request, username, template="accounts/account_profile.html",
     context = {"profile_user": get_object_or_404(User, **lookup)}
     context.update(extra_context or {})
 
-    p = Portfolio.objects.get(title="Informativos")
-    informativos = PortfolioItem.objects.published(
-        for_user=request.user).filter(parent=p)
-    context.update({"informativos": informativos})
-    print("INFORMATIVOS:", informativos)
+    informativos = get_specific_portfolio_item(request, "Informativos")
+    cronograma = get_specific_portfolio_item(request, "Cronograma")
+    
+    context.update(
+        {"informativos": informativos, "cronograma": cronograma}
+    )
     return TemplateResponse(request, template, context)
+
+def get_specific_portfolio_item(request, specific):
+    try:
+        p = Portfolio.objects.get(title=specific)
+        item = PortfolioItem.objects.published(
+            for_user=request.user).filter(parent=p)
+    except Portfolio.DoesNotExist:
+        item = None
+    return item
