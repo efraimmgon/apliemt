@@ -51,15 +51,15 @@
           <div class="row">
             <div class="span6">
               <div class="hover_img">
-                <a class="no-pjax" href="{{ info.get_absolute_url }}">
+                <a class="no-pjax" href="{{ info.get_absolute_url }}" target="_blank">
                   <img src="{{MEDIA_URL}}{% thumbnail info.featured_image 570 245 %}" alt="" />
                 </a>
-                <center><strong>{{ info.title }}</strong></center>
+                <center class="spaced"><strong>{{ info.title }}</strong></center>
               </div>
             </div>
           </div>
           {% empty %}
-          Não há informativos
+          Não há informativos.
           {% endfor %}
         </div>
 
@@ -70,14 +70,14 @@
         {% for c in cronograma %}
           <div class="row">
             <div class="span6">
-              <h4>{{ cronograma.title }}</h4>
+              <h4>{{ c.title }}</h4>
               <div>
-                {{ cronograma.content }}
+                {{ c.content|safe }}
               </div>
             </div>
           </div>
         {% empty %}
-          nil
+          Não há cronogramas.
         {% endfor %}
       </div>
 
@@ -88,19 +88,21 @@
 
       <div>
         <h3>
-          Inscrição XIXEPI
+          Inscrição XIX EPI
         </h3>
         <div>
-          Realizar inscrição como ouvinte.<br />
-          Submeter comunicação. <br/>
-          Enviar comprovante de pagamento. <br />
-          Receber certificado. <br />
+          <ul class="unstyled">
+            <li><a class="no-pjax" href="/epi/inscricoes-epi" target="_blank">Realizar inscrição como ouvinte.</a></li>
+            <li><a class="no-pjax" href="/epi/submeter-comunicacao" target="_blank">Submeter comunicação.</a></li>
+            <li><a class="no-pjax" href="/epi/comprovante-de-pagamento" target="_blank">Enviar comprovante de pagamento.</a></li>
+            <li><a class="no-pjax" href="" target="_blank">Receber certificado.</a></li>
+          </ul>
         </div>
       </div>
 
       <div>
         <h3>
-          Trabalhos
+          Trabalhos [EM BREVE]
         </h3>
         <div>
           Acompanhar Sessão Coordenada. <br />
@@ -110,7 +112,7 @@
 
       <div>
         <h3>
-          ANAIS Eletrônicos
+          ANAIS Eletrônicos [EM BREVE]
         </h3>
         <div>
           Submeter trabalho. <br />

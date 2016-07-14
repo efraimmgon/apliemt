@@ -6,6 +6,8 @@ from mezzanine.core.models import RichText, Orderable, Slugged
 from mezzanine.pages.models import Page
 from mezzanine.utils.models import upload_to
 
+
+
 class HomePage(Page, RichText):
 	"""
 	A page representing the format of the home page
