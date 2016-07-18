@@ -11,6 +11,7 @@ from mezzanine.pages.views import page as page_view
 
 from links.urls import urlpatterns as links_urls
 from links.urls import override
+from epi.urls import urlpatterns as epi_urls
 #from overrider.urls import urlpatterns as overrider_urls
 
 admin.autodiscover()
@@ -24,6 +25,7 @@ urlpatterns = i18n_patterns(
     # admin interface, which would be marginally more secure.
     url("^admin/", include(admin.site.urls)),
     url("^forum/", include(links_urls)),
+    url("^", include(epi_urls)),
     #url("^", include(overrider_urls)),
 )
 

@@ -1,0 +1,58 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n mezzanine_tags %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}mezzanine/css/admin/form_entries.css">
+<script src="{{ STATIC_URL }}mezzanine/js/admin/form_entries.js"></script>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="../../../../">{% trans "Home" %}</a> &rsaquo;
+     <a href="../../../">{{ opts.app_label|capfirst|escape }}</a> &rsaquo;
+     <a href="../../">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo;
+     <a href="../">{{ original|truncatewords:"18" }}</a> &rsaquo;
+     {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% errors_for form %}
+
+<form method="GET" action="{% url 'form_table' %}">
+  {% fields_for form %}
+  <input class="button default" type="submit">
+</form>
+<hr>
+<table>  
+<tr class="{% cycle on,off %}"> 
+  {% for column in table.header %}  
+  <th>  
+    {% if column.sortable %}  
+      <a href="?sort={{ column.name_toggled }}">  
+        {{ column }}  
+      </a>  
+      {% if column.is_ordered_reverse %}  
+        <img src="up.png" />  
+      {% else %}  
+        <img src="down.png" />  
+      {% endif %}  
+    {% else %}  
+      {{ column.label }}  
+    {% endif %}  
+  </th>  
+  {% endfor %}  
+</tr>  
+  
+{% for row in table.rows %}  
+  <tr class="{% cycle on,off %}">  
+  {% for value in row %}  
+    <td>{{ value }}</td>  
+  {% endfor %}  
+  </tr>  
+{% endfor %}  
+</table>
+{% endblock %}

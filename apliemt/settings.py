@@ -257,6 +257,7 @@ INSTALLED_APPS = (
     "mezzanine.accounts",
     # "mezzanine.mobile",
     "theme",
+    "epi",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
