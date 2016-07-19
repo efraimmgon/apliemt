@@ -7,14 +7,16 @@
 
 {% if page.homepage.slides.all %}
 <!--slider-->
+<!--
 <div id="main_slider">
 	<div class="camera_wrap" id="camera_wrap_1">
 		{% for slide in page.homepage.slides.all %}
 		<div data-src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %}"></div>
 		{% endfor %}
-	</div><!-- #camera_wrap_1 -->
+	</div>
 	<div class="clear"></div>
 </div>
+-->
 <!--//slider-->
 {% endif %}
 
@@ -82,23 +84,6 @@
 <!--//featured works-->
 {% endif %}
 
-{% if page.homepage.content_heading or page.homepage.content_content %}
-<!--ABOUT US-->
-<div class="wrap block">
-	<div class="container">
-		<div class="row news_block">
-			<div class="span12">
-			{% editable page.homepage.content_heading page.homepage.content_content %}
-				<h2 class="title">{{ page.homepage.content_heading }}</h2>
-				{{ page.homepage.content_content|safe }}
-			{% endeditable %}
-			</div>           
-		</div>
-	</div>
-</div>
-<!--ABOUT US-->
-{% endif %}
-
 <!--latest posts-->
 <div class="wrap block carousel_block">
 	<div class="container">
@@ -136,6 +121,23 @@
 	</div>
 </div>        
 <!--//latest posts--> 
+
+{% if page.homepage.content_heading or page.homepage.content_content %}
+<!--ABOUT US-->
+<div class="wrap block">
+	<div class="container">
+		<div class="row news_block">
+			<div class="span12">
+			{% editable page.homepage.content_heading page.homepage.content_content %}
+				<h2 class="title">{{ page.homepage.content_heading }}</h2>
+				{{ page.homepage.content_content|safe }}
+			{% endeditable %}
+			</div>           
+		</div>
+	</div>
+</div>
+<!--ABOUT US-->
+{% endif %}
 
 </div>
 {% endblock %}
