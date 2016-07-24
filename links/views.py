@@ -231,6 +231,7 @@ def profile(request, username, template="accounts/account_profile.html",
 
     informativos = get_specific_portfolio_item(request, "Informativos")
     cronograma = get_specific_portfolio_item(request, "Cronograma")
+
     
     context.update(
         {"informativos": informativos, "cronograma": cronograma}
@@ -239,7 +240,7 @@ def profile(request, username, template="accounts/account_profile.html",
 
 def get_specific_portfolio_item(request, specific):
     try:
-        p = Portfolio.objects.get(title=specific)
+        p = Portfolio.objects.get(title_pt_br=specific)
         item = PortfolioItem.objects.published(
             for_user=request.user).filter(parent=p)
     except Portfolio.DoesNotExist:
