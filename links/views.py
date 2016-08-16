@@ -1,16 +1,21 @@
 from __future__ import unicode_literals
 from future.builtins import super
 
+import os
 from datetime import timedelta
+from mimetypes import guess_type
+from functools import reduce
 
+from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.contrib.messages import info, error
 
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.timezone import now
 from django.views.generic import ListView, CreateView, DetailView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
+from django.http import HttpResponse
 
 from mezzanine.accounts import get_profile_model
 from mezzanine.conf import settings
@@ -21,10 +26,10 @@ from links.forms import LinkForm
 from links.models import Link
 from links.utils import order_by_score
 
-from theme.models import Portfolio, PortfolioItem
+from theme.models import Portfolio, PortfolioItem, Certificate
 
 
-
+fs = FileSystemStorage(location=settings.FORMS_UPLOAD_ROOT)
 
 
 # Returns the name to be used for reverse profile lookups from the user
@@ -237,6 +242,35 @@ def profile(request, username, template="accounts/account_profile.html",
         {"informativos": informativos, "cronograma": cronograma}
     )
     return TemplateResponse(request, template, context)
+
+def certificates(request, username):
+    lookup = {"username__iexact": username, "is_active": True}
+    certificates = Certificate.objects.filter(owner=request.user)
+    context = {
+        "profile_user": get_object_or_404(User, **lookup),
+        "certificates": reduce(acc_certificates, certificates, [])
+    }
+    return render(request, "certificates.html", context)
+
+def download_certificate(request, username, field_id):
+    obj = get_object_or_404(Certificate, id=field_id)
+    ## the obj does not return a full path
+    #path = os.path.join(fs.location, obj.certificate)
+    path = "".join([fs.location, "/static/media/", str(obj.certificate)])
+    response = HttpResponse(content_type=guess_type(path)[0])
+    with open(path, "r+b") as f:
+        response["Content-Disposition"] = "attachment; filename=%s" % f.name
+        response.write(f.read())
+    return response
+
+def testing(request):
+    return HttpResponse("Ok")
+
+
+### Helper functions
+
+def acc_certificates(acc, c):
+    return acc + [{"id": c.id, "name": os.path.basename(str(c.certificate))}]
 
 def get_specific_portfolio_item(request, specific):
     try:

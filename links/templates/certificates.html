@@ -34,7 +34,7 @@
 
 <div class="container">
   <h2>
-    Intranet
+    Certificados
   </h2>
 
   <div class="row">
@@ -43,44 +43,17 @@
     <div class="span6">
 
       <div>
-        <h3>
-          Informativos
-        </h3>
-          {% for info in informativos %}
+          {% for c in certificates %}
           <div class="row">
             <div class="span6">
-              <div class="hover_img">
-                <a class="no-pjax" href="{{ info.get_absolute_url }}" target="_blank">
-                  <img src="{{MEDIA_URL}}{% thumbnail info.featured_image 570 245 %}" alt="" />
-                </a>
-                <center class="spaced"><strong>{{ info.title }}</strong></center>
-              </div>
+              <p><a class="no-pjax" href="/users/{{ profile_user.username }}/certificado/{{ c.id }}">{{c.name}}</a></p>
             </div>
           </div>
+
           {% empty %}
-          Não há informativos.
+          Você não possui certificados.
           {% endfor %}
         </div>
-
-      <div>
-        <h3>
-          Cronograma
-        </h3>
-        {% for c in cronograma %}
-          <div class="row">
-            <div class="span6">
-              <h4>{{ c.title }}</h4>
-              <div>
-                {{ c.content|safe }}
-              </div>
-            </div>
-          </div>
-        {% empty %}
-          Não há cronogramas.
-        {% endfor %}
-      </div>
-
-    </div>
 
     <!-- right -->
     <div class="span6">
@@ -94,7 +67,7 @@
             <li><a class="no-pjax" href="/epi/inscricoes-epi" target="_blank">Realizar inscrição como ouvinte.</a></li>
             <li><a class="no-pjax" href="/epi/submeter-comunicacao" target="_blank">Submeter comunicação.</a></li>
             <li><a class="no-pjax" href="/epi/comprovante-de-pagamento" target="_blank">Enviar comprovante de pagamento.</a></li>
-            <li><a class="no-pjax" href="/users/{{ profile_user.username }}/certificados" target="_blank">Certificados.</a></li>
+            <li><a class="no-pjax" href="/users/{{ profile_user.username }}/certificados/" target="_blank">Certificados.</a></li>
           </ul>
         </div>
       </div>

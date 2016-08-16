@@ -1,10 +1,12 @@
 from django.contrib import admin
-from mezzanine.core.admin import TabularDynamicInlineAdmin
+from mezzanine.core.admin import (
+	TabularDynamicInlineAdmin, DisplayableAdmin)
 from mezzanine.pages.admin import PageAdmin
+
 
 from theme.models import (
 	HomePage, Slide, IconBlurb, Portfolio, PortfolioItem, PortfolioItemImage,
-	PortfolioItemCategory
+	PortfolioItemCategory, Certificate
 )
 
 class SlideInline(TabularDynamicInlineAdmin):
@@ -27,3 +29,6 @@ class PortfolioItemAdmin(PageAdmin):
 
 admin.site.register(PortfolioItem, PortfolioItemAdmin)
 admin.site.register(PortfolioItemCategory)
+
+
+admin.site.register(Certificate)

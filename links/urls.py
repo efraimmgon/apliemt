@@ -7,6 +7,8 @@ from mezzanine.conf import settings
 from links.views import (LinkList, LinkCreate, LinkDetail, CommentList, TagList,
 						profile, profile_redirect)
 
+from links import views
+
 PROFILE_URL = getattr(settings, "PROFILE_URL", "/users/")
 _slash = "/" if settings.APPEND_SLASH else ""
 
@@ -40,16 +42,22 @@ urlpatterns = patterns("",
         name="tag_list"),
     url("^tags/(?P<tag>.*)/$",
         LinkList.as_view(),
-        name="link_list_tag"),
-)
+        name="link_list_tag"),)
 
 
 ### Overriding the original at mezzanine.accounts
 
+
 if settings.ACCOUNTS_PROFILE_VIEWS_ENABLED:
     override = [
+        url("^testing/$", views.testing, name="testing"),
         url("^%s%s$" % (PROFILE_URL.strip("/"), _slash),
             profile_redirect, name="profile_redirect"),
+        url("^%s/(?P<username>.*)/certificados/$" % PROFILE_URL.strip("/"), 
+            views.certificates, name="certificates"),
+        url("^%s/(?P<username>.*)/certificado/(?P<field_id>\d+)$" % (
+            PROFILE_URL.strip("/")),  views.download_certificate, 
+            name="_download_certificate"),
         url("^%s/(?P<username>.*)%s$" % (PROFILE_URL.strip("/"), _slash),
             profile, name="profile"),
     ]

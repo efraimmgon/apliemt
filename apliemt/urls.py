@@ -26,8 +26,11 @@ urlpatterns = i18n_patterns(
     url("^admin/", include(admin.site.urls)),
     url("^forum/", include(links_urls)),
     url("^", include(epi_urls)),
-    #url("^", include(overrider_urls)),
+    url("^", include(override)),
 )
+
+## Overriding some mezzanine urls with mine:
+#urlpatterns += i18n_patterns(*override)
 
 if settings.USE_MODELTRANSLATION:
     urlpatterns += [

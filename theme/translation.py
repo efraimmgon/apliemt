@@ -1,7 +1,7 @@
 from modeltranslation.translator import translator, TranslationOptions
 from .models import (
 	HomePage, IconBlurb, Portfolio, PortfolioItem, PortfolioItemImage,
-	Slide
+	Slide, Certificate
 )
 
 class TranslatedHomePage(TranslationOptions):
@@ -29,3 +29,8 @@ translator.register(Slide, TranslatedSlide)
 translator.register(Portfolio, TranslatedPortfolio)
 translator.register(PortfolioItem, TranslatedPortfolioItem)
 translator.register(PortfolioItemImage, TranslatedPortfolioItemImage)
+
+class TranslatedCertificate(TranslationOptions):
+	fields = ()
+
+translator.register(Certificate, TranslatedCertificate)

@@ -1,11 +1,14 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from mezzanine.core.fields import FileField, RichTextField
 from mezzanine.core.models import RichText, Orderable, Slugged
 from mezzanine.pages.models import Page
 from mezzanine.utils.models import upload_to
 
+
+USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
 
 class HomePage(Page, RichText):
@@ -115,3 +118,9 @@ class PortfolioItemCategory(Slugged):
 		verbose_name = _("Portfolio Item Category")
 		verbose_name_plural = _("Portfolio Item Categories")
 		ordering = ("title",)
+
+
+class Certificate(models.Model):
+	certificate = FileField(max_length=200, format="Document",
+		upload_to=upload_to("theme.Certificate.certificate", "certificates"))
+	owner = models.ForeignKey(USER_MODEL)
