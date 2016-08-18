@@ -256,7 +256,11 @@ def download_certificate(request, username, field_id):
     obj = get_object_or_404(Certificate, id=field_id)
     ## the obj does not return a full path
     #path = os.path.join(fs.location, obj.certificate)
-    path = "".join([fs.location, "/static/media/", str(obj.certificate)])
+    if settings.DEBUG:
+        path = "".join([fs.location, "/static/media/", str(obj.certificate)])
+    else:
+        path = "".join([fs.location, 
+            "/Sites/apliemt/static/media/", str(obj.certificate)])
     response = HttpResponse(content_type=guess_type(path)[0])
     with open(path, "r+b") as f:
         response["Content-Disposition"] = "attachment; filename=%s" % f.name
