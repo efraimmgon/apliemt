@@ -16,7 +16,7 @@
     {% for image in images %}
     <div class="span4 element">
         <div class="hover_img">
-            <img scr="{{ MEDIA_URL }}{% thumbnail image.file 370 185 %}" alt="" />
+            <img src="{{ MEDIA_URL }}{% thumbnail image.file 370 185 %}" alt="" />
             <span class="portfolio_zoom">
                 <a href="{{ MEDIA_URL }}{% thumbnail image.file 1200 0 %}" rel="prettyPhoto[portfolio1]"></a>
             </span>
@@ -29,6 +29,6 @@
     {% endwith %}
 </div>
 
-{% endblock }
+{% endblock %}
 
 {% block right_wrapper %}{% endblock %}
