@@ -21,6 +21,7 @@ from mezzanine.accounts import get_profile_model
 from mezzanine.conf import settings
 from mezzanine.generic.models import ThreadedComment, Keyword
 from mezzanine.utils.views import paginate
+from mezzanine.pages.models import RichTextPage
 
 from links.forms import LinkForm
 from links.models import Link
@@ -214,7 +215,10 @@ class TagList(TemplateView):
     template_name = "links/tag_list.html"
 
 
-### Overriding the original at mezzanine.accounts
+#################################################
+# Overriding the original at mezzanine.accounts #
+#################################################
+
 
 @login_required
 def profile_redirect(request):
@@ -234,12 +238,10 @@ def profile(request, username, template="accounts/account_profile.html",
     context = {"profile_user": get_object_or_404(User, **lookup)}
     context.update(extra_context or {})
 
-    informativos = get_specific_portfolio_item(request, "Informativos")
-    cronograma = get_specific_portfolio_item(request, "Cronograma")
-
-    
     context.update(
-        {"informativos": informativos, "cronograma": cronograma}
+        {"informativos": get_specific_portfolio_item(request, "Informativos"),
+         "cronograma": get_specific_portfolio_item(request, "Cronograma"),
+         "XIX_EPI": RichTextPage.objects.get(title_pt_br="XIX EPI")}
     )
     return TemplateResponse(request, template, context)
 
@@ -259,7 +261,7 @@ def download_certificate(request, username, field_id):
     if settings.DEBUG:
         path = "".join([fs.location, "/static/media/", str(obj.certificate)])
     else:
-        path = "".join([fs.location, 
+        path = "".join([fs.location,
             "/Sites/apliemt/static/media/", str(obj.certificate)])
     response = HttpResponse(content_type=guess_type(path)[0])
     with open(path, "r+b") as f:
