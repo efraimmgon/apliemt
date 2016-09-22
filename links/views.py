@@ -241,7 +241,7 @@ def profile(request, username, template="accounts/account_profile.html",
     context.update(
         {"informativos": get_specific_portfolio_item(request, "Informativos"),
          "cronograma": get_specific_portfolio_item(request, "Cronograma"),
-         "XIX_EPI": RichTextPage.objects.get(title_pt_br="XIX EPI")}
+         "XIX_EPI": RichTextPage.objects.get(title_pt_br__icontains="XIX EPI")}
     )
     return TemplateResponse(request, template, context)
 
