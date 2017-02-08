@@ -119,8 +119,10 @@ class PortfolioItemCategory(Slugged):
 		verbose_name_plural = _("Portfolio Item Categories")
 		ordering = ("title",)
 
-
 class Certificate(models.Model):
 	certificate = FileField(max_length=200, format="Document",
 		upload_to=upload_to("theme.Certificate.certificate", "certificates"))
 	owner = models.ForeignKey(USER_MODEL)
+
+	def __str__(self):
+		return "%s - %s" % (self.certificate, self.owner)

@@ -53,11 +53,14 @@ if settings.ACCOUNTS_PROFILE_VIEWS_ENABLED:
         url("^testing/$", views.testing, name="testing"),
         url("^%s%s$" % (PROFILE_URL.strip("/"), _slash),
             profile_redirect, name="profile_redirect"),
-        url("^%s/(?P<username>.*)/certificados/$" % PROFILE_URL.strip("/"), 
+		# certificate
+        url("^%s/(?P<username>.*)/certificados/$" % PROFILE_URL.strip("/"),
             views.certificates, name="certificates"),
+		# download certificate
         url("^%s/(?P<username>.*)/certificado/(?P<field_id>\d+)$" % (
-            PROFILE_URL.strip("/")),  views.download_certificate, 
+            PROFILE_URL.strip("/")),  views.download_certificate,
             name="_download_certificate"),
+		# profile
         url("^%s/(?P<username>.*)%s$" % (PROFILE_URL.strip("/"), _slash),
             profile, name="profile"),
     ]
