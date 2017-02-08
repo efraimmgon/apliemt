@@ -250,7 +250,8 @@ def certificates(request, username):
     certificates = Certificate.objects.filter(owner=request.user)
     context = {
         "profile_user": get_object_or_404(User, **lookup),
-        "certificates": reduce(acc_certificates, certificates, [])
+        "certificates": reduce(acc_certificates, certificates, []),
+        "XIX_EPI": RichTextPage.objects.get(title_pt_br__icontains="XIX EPI")
     }
     return render(request, "certificates.html", context)
 
