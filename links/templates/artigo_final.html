@@ -1,0 +1,92 @@
+{% extends "links_/base.html" %}
+{% load i18n future mezzanine_tags drum_tags pages_tags %}
+
+{% block meta_title %}{{ profile_user.username }}{% endblock %}
+{% block title %}{{ profile_user|get_profile }}{% endblock %}
+
+{% block main %}
+{% if profile_user == request.user %}
+<div class="pull-right">
+    <a class="btn btn-large btn-primary btn-profile" href="{% url "profile_update" %}">{% trans "Update profile" %}</a>
+</div>
+{% endif %}
+<div class="clearfix">
+  <h2>
+    Perfil
+  </h2>
+
+    {% with profile_user|get_profile as profile %}
+    {% if profile.bio %}
+    <p class="bio">{{ profile.bio|urlize|linebreaks }}</p>
+    {% endif %}
+    {% if profile.website %}
+    <p class="bio">{% trans "Website" %}: {{ profile.website|urlize }}</p>
+    {% endif %}
+    {% endwith %}
+
+    <a href="{% url "comment_list_user" profile_user.username %}">{% trans "comments" %} ({{ profile_user.comment_comments.count }})</a> |
+    <a href="{% url "link_list_user" profile_user.username %}">links ({{ profile_user.links.published.count }})</a>
+
+</div>
+
+{% if profile_user == request.user %}
+<hr />
+
+<div class="container">
+
+
+  <div class="row">
+    <!-- left -->
+    <div class="span6">
+      <h3>Cartas de aceite</h3>
+      <div>
+          {% for art in artigos %}
+          <div class="row">
+            <div class="span6">
+              <p><a class="no-pjax" href="/users/{{ profile_user.username }}/artigos-finais/{{ art.id }}">{{art.name}}</a></p>
+            </div>
+          </div>
+
+          {% empty %}
+          No soup for you.
+          {% endfor %}
+      </div>
+    </div>
+
+    <!-- right -->
+    <div class="span6">
+
+      <div>
+        <h3>
+          Inscrição XIX EPI
+        </h3>
+        <div>
+          <p> {% page_menu XIX_EPI "pages/menus/tree.html" %}</p>
+        </div>
+      </div>
+<!--
+      <div>
+        <h3>
+          Trabalhos [EM BREVE]
+        </h3>
+        <div>
+          Acompanhar Sessão Coordenada. <br />
+          Acompanhar Sessão Individual. <br />
+        </div>
+      </div>
+
+      <div>
+        <h3>
+          ANAIS Eletrônicos [EM BREVE]
+        </h3>
+        <div>
+          Submeter trabalho. <br />
+          Acompanhar Sub-transmissão. <br />
+          Normas de Publicação. <br />
+        </div>
+      </div>
+-->
+    </div>
+</div>
+{% endif %}
+{% endblock %}

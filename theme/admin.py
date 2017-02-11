@@ -6,7 +6,7 @@ from mezzanine.pages.admin import PageAdmin
 
 from theme.models import (
 	HomePage, Slide, IconBlurb, Portfolio, PortfolioItem, PortfolioItemImage,
-	PortfolioItemCategory, Certificate
+	PortfolioItemCategory, Certificate, ArtigoFinal
 )
 
 class SlideInline(TabularDynamicInlineAdmin):
@@ -32,3 +32,4 @@ admin.site.register(PortfolioItemCategory)
 
 
 admin.site.register(Certificate)
+admin.site.register(ArtigoFinal)

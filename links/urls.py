@@ -60,6 +60,14 @@ if settings.ACCOUNTS_PROFILE_VIEWS_ENABLED:
         url("^%s/(?P<username>.*)/certificado/(?P<field_id>\d+)$" % (
             PROFILE_URL.strip("/")),  views.download_certificate,
             name="_download_certificate"),
+		# artigo final
+        url("^%s/(?P<username>.*)/artigos-finais/$" % PROFILE_URL.strip("/"),
+            views.artigo_final, name="artigos-finais"),
+		# download artigo finai
+        url("^%s/(?P<username>.*)/artigos-finais/(?P<field_id>\d+)$" % (
+            PROFILE_URL.strip("/")),  views.download_artigo_final,
+            name="_download-artigo-final"),
+
 		# profile
         url("^%s/(?P<username>.*)%s$" % (PROFILE_URL.strip("/"), _slash),
             profile, name="profile"),

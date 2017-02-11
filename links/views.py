@@ -27,7 +27,7 @@ from links.forms import LinkForm
 from links.models import Link
 from links.utils import order_by_score
 
-from theme.models import Portfolio, PortfolioItem, Certificate
+from theme.models import Portfolio, PortfolioItem, Certificate, ArtigoFinal
 
 
 fs = FileSystemStorage(location=settings.FORMS_UPLOAD_ROOT)
@@ -245,6 +245,10 @@ def profile(request, username, template="accounts/account_profile.html",
     )
     return TemplateResponse(request, template, context)
 
+# ------------------------------------------------------
+# certificados
+# ------------------------------------------------------
+
 def certificates(request, username):
     lookup = {"username__iexact": username, "is_active": True}
     certificates = Certificate.objects.filter(owner=request.user)
@@ -273,8 +277,41 @@ def download_certificate(request, username, field_id):
 def testing(request):
     return HttpResponse("Ok")
 
+# ------------------------------------------------------
+# artigo final
+# ------------------------------------------------------
 
-### Helper functions
+def acc_artigos(acc, i):
+    return acc + [{"id": i.id, "name": os.path.basename(str(i.doc))}]
+
+def artigo_final(request, username):
+    lookup = {"username__iexact": username, "is_active": True}
+    artigos = ArtigoFinal.objects.filter(owner=request.user)
+    context = {
+        "profile_user": get_object_or_404(User, **lookup),
+        "artigos": reduce(acc_artigos, artigos, []),
+        "XIX_EPI": RichTextPage.objects.get(title_pt_br__icontains="XIX EPI")
+    }
+    return render(request, "artigo_final.html", context)
+
+def download_artigo_final(request, username, field_id):
+    obj = get_object_or_404(Certificate, id=field_id)
+    ## the obj does not return a full path
+    #path = os.path.join(fs.location, obj.certificate)
+    if settings.DEBUG:
+        path = "".join([fs.location, "/static/media/", str(obj.doc)])
+    else:
+        path = "".join([fs.location,
+            "/Sites/apliemt/static/media/", str(obj.doc)])
+    response = HttpResponse(content_type=guess_type(path)[0])
+    with open(path, "r+b") as f:
+        response["Content-Disposition"] = "attachment; filename=%s" % f.name
+        response.write(f.read())
+    return response
+
+# ------------------------------------------------------
+# Helper functions
+# ------------------------------------------------------
 
 def acc_certificates(acc, c):
     return acc + [{"id": c.id, "name": os.path.basename(str(c.certificate))}]

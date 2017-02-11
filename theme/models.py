@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
@@ -125,4 +127,12 @@ class Certificate(models.Model):
 	owner = models.ForeignKey(USER_MODEL)
 
 	def __str__(self):
-		return "%s - %s" % (self.certificate, self.owner)
+		return "%s - %s" % (os.path.basename(str(self.certificate)), self.owner)
+
+class ArtigoFinal(models.Model):
+	doc = FileField(max_length=200, format="Document",
+		upload_to=upload_to("theme.ArtigoFinal.doc", "artigos"))
+	owner = models.ForeignKey(USER_MODEL)
+
+	def __str__(self):
+		return "%s - %s" % (os.path.basename(str(self.doc)), self.owner)
