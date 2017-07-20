@@ -219,6 +219,45 @@ class TagList(TemplateView):
 # Overriding the original at mezzanine.accounts #
 #################################################
 
+# ------------------------------------------------------
+# Helper functions
+# ------------------------------------------------------
+
+def get_certificates(certificates):
+    return ({"id": c.id, "name": os.path.basename(str(c.certificate))}
+            for c in certificates)
+
+def get_portfolio_item_by_title(request, title):
+    try:
+        p = Portfolio.objects.get(title_pt_br=title)
+        item = PortfolioItem.objects.published(
+            for_user=request.user).filter(parent=p)
+    except Portfolio.DoesNotExist:
+        item = None
+    return item
+
+def get_EPI(s):
+    return RichTextPage.objects.filter(title_pt_br__icontains=s).first()
+
+def get_artigo_final(articles):
+    return ({"id": a.id, "name": os.path.basename(str(a.doc))} for a in articles)
+
+
+def resolve_filepath(filename):
+    if settings.DEBUG:
+        return "".join([fs.location, "/static/media/", filename])
+    else:
+        return "".join([fs.location, "/Sites/apliemt/static/media/", filename])
+
+def download_file(response, filepath):
+    with open(filepath, "r+b") as f:
+        response["Content-Disposition"] = "attachment; filename=%s" % f.name
+        response.write(f.read())
+    return response
+
+# ------------------------------------------------------
+# Views
+# ------------------------------------------------------
 
 @login_required
 def profile_redirect(request):
@@ -238,11 +277,13 @@ def profile(request, username, template="accounts/account_profile.html",
     context = {"profile_user": get_object_or_404(User, **lookup)}
     context.update(extra_context or {})
 
-    context.update(
-        {"informativos": get_specific_portfolio_item(request, "Informativos"),
-         "cronograma": get_specific_portfolio_item(request, "Cronograma"),
-         "XIX_EPI": RichTextPage.objects.get(title_pt_br__icontains="XIX EPI")}
-    )
+    xtra_context = {
+        "informativos": get_portfolio_item_by_title(request, "Informativos"),
+         "cronograma": get_portfolio_item_by_title(request, "Cronograma"),
+         "XIX_EPI": get_EPI("XIX EPI"),
+         "XX_EPI": get_EPI("XX EPI")
+    }
+    context.update(xtra_context)
     return TemplateResponse(request, template, context)
 
 # ------------------------------------------------------
@@ -251,76 +292,36 @@ def profile(request, username, template="accounts/account_profile.html",
 
 def certificates(request, username):
     lookup = {"username__iexact": username, "is_active": True}
-    certificates = Certificate.objects.filter(owner=request.user)
     context = {
         "profile_user": get_object_or_404(User, **lookup),
-        "certificates": reduce(acc_certificates, certificates, []),
-        "XIX_EPI": RichTextPage.objects.get(title_pt_br__icontains="XIX EPI")
+        "certificates": get_certificates(Certificate.objects.filter(owner=request.user)),
+        "XIX_EPI": get_EPI("XIX EPI"),
+        "XX_EPI": get_EPI("XX EPI")
     }
     return render(request, "certificates.html", context)
 
 def download_certificate(request, username, field_id):
     obj = get_object_or_404(Certificate, id=field_id)
-    ## the obj does not return a full path
-    #path = os.path.join(fs.location, obj.certificate)
-    if settings.DEBUG:
-        path = "".join([fs.location, "/static/media/", str(obj.certificate)])
-    else:
-        path = "".join([fs.location,
-            "/Sites/apliemt/static/media/", str(obj.certificate)])
-    response = HttpResponse(content_type=guess_type(path)[0])
-    with open(path, "r+b") as f:
-        response["Content-Disposition"] = "attachment; filename=%s" % f.name
-        response.write(f.read())
-    return response
-
-def testing(request):
-    return HttpResponse("Ok")
+    filepath = resolve_filepath(str(obj.certificate))
+    response = HttpResponse(content_type=guess_type(filepath)[0])
+    return download_file(response, filepath)
 
 # ------------------------------------------------------
 # artigo final
 # ------------------------------------------------------
 
-def acc_artigos(acc, i):
-    return acc + [{"id": i.id, "name": os.path.basename(str(i.doc))}]
-
 def artigo_final(request, username):
     lookup = {"username__iexact": username, "is_active": True}
-    artigos = ArtigoFinal.objects.filter(owner=request.user)
     context = {
         "profile_user": get_object_or_404(User, **lookup),
-        "artigos": reduce(acc_artigos, artigos, []),
-        "XIX_EPI": RichTextPage.objects.get(title_pt_br__icontains="XIX EPI")
+        "artigos": get_artigo_final(ArtigoFinal.objects.filter(owner=request.user)),
+        "XIX_EPI": get_EPI("XIX EPI"),
+        "XX_EPI": get_EPI("XX EPI")
     }
     return render(request, "artigo_final.html", context)
 
 def download_artigo_final(request, username, field_id):
-    obj = get_object_or_404(Certificate, id=field_id)
-    ## the obj does not return a full path
-    #path = os.path.join(fs.location, obj.certificate)
-    if settings.DEBUG:
-        path = "".join([fs.location, "/static/media/", str(obj.doc)])
-    else:
-        path = "".join([fs.location,
-            "/Sites/apliemt/static/media/", str(obj.doc)])
-    response = HttpResponse(content_type=guess_type(path)[0])
-    with open(path, "r+b") as f:
-        response["Content-Disposition"] = "attachment; filename=%s" % f.name
-        response.write(f.read())
-    return response
-
-# ------------------------------------------------------
-# Helper functions
-# ------------------------------------------------------
-
-def acc_certificates(acc, c):
-    return acc + [{"id": c.id, "name": os.path.basename(str(c.certificate))}]
-
-def get_specific_portfolio_item(request, specific):
-    try:
-        p = Portfolio.objects.get(title_pt_br=specific)
-        item = PortfolioItem.objects.published(
-            for_user=request.user).filter(parent=p)
-    except Portfolio.DoesNotExist:
-        item = None
-    return item
+    obj = get_object_or_404(ArtigoFinal, id=field_id)
+    filepath = resolve_filepath(str(obj.doc))
+    response = HttpResponse(content_type=guess_type(filepath)[0])
+    return download_file(response, filepath)

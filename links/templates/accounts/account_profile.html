@@ -33,24 +33,17 @@
 <hr />
 
 <div class="container">
-  <h2>
-    Intranet
-  </h2>
-
   <div class="row">
 
     <!-- left -->
     <div class="span6">
-
       <div>
-        <h3>
-          Informativos
-        </h3>
+        <h3>Informativos</h3>
           {% for info in informativos %}
           <div class="row">
             <div class="span6">
               <div class="hover_img">
-                <a class="no-pjax" href="{{ info.get_absolute_url }}" target="_blank">
+                <a class="no-pjax" href="{{ info.get_absolute_url }}">
                   <img src="{{MEDIA_URL}}{% thumbnail info.featured_image 570 245 %}" alt="" />
                 </a>
                 <center class="spaced"><strong>{{ info.title }}</strong></center>
@@ -63,9 +56,7 @@
         </div>
 
       <div>
-        <h3>
-          Cronograma
-        </h3>
+        <h3>Cronograma</h3>
         {% for c in cronograma %}
           <div class="row">
             <div class="span6">
@@ -86,35 +77,16 @@
     <div class="span6">
 
       <div>
-        <h3>
-          Inscrição XIX EPI
-        </h3>
+        <h3>Inscrição XIX EPI</h3>
         <div>
-          <p> {% page_menu XIX_EPI "pages/menus/tree.html" %}</p>
-        </div>
-      </div>
-<!--
-      <div>
-        <h3>
-          Trabalhos [EM BREVE]
-        </h3>
-        <div>
-          Acompanhar Sessão Coordenada. <br />
-          Acompanhar Sessão Individual. <br />
+          {% if XX_EPI %}
+            <p> {% page_menu XX_EPI "pages/menus/tree.html" %}</p>
+          {% else %}
+            <p> {% page_menu XIX_EPI "pages/menus/tree.html" %}</p>
+          {% endif %}
         </div>
       </div>
 
-      <div>
-        <h3>
-          ANAIS Eletrônicos [EM BREVE]
-        </h3>
-        <div>
-          Submeter trabalho. <br />
-          Acompanhar Sub-transmissão. <br />
-          Normas de Publicação. <br />
-        </div>
-      </div>
--->
     </div>
   </div>
 </div>

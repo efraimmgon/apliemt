@@ -50,7 +50,6 @@ urlpatterns = patterns("",
 
 if settings.ACCOUNTS_PROFILE_VIEWS_ENABLED:
     override = [
-        url("^testing/$", views.testing, name="testing"),
         url("^%s%s$" % (PROFILE_URL.strip("/"), _slash),
             profile_redirect, name="profile_redirect"),
 		# certificate
