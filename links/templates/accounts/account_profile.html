@@ -77,14 +77,17 @@
     <div class="span6">
 
       <div>
-        <h3>Inscrição XIX EPI</h3>
+        {% if XX_EPI %}
+        <h3>XX EPI</h3>
         <div>
-          {% if XX_EPI %}
             <p> {% page_menu XX_EPI "pages/menus/tree.html" %}</p>
-          {% else %}
-            <p> {% page_menu XIX_EPI "pages/menus/tree.html" %}</p>
-          {% endif %}
         </div>
+        {% else %}
+        <h3>XIX EPI</h3>
+        <div>
+            <p> {% page_menu XIX_EPI "pages/menus/tree.html" %}</p>
+        </div>
+        {% endif %}
       </div>
 
     </div>
