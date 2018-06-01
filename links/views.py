@@ -240,7 +240,7 @@ def get_EPI(s):
     return RichTextPage.objects.filter(title_pt_br__icontains=s).first()
 
 def get_profile_sidebar():
-    return RichTextPage.objects.filter(keywords__keyword__slug="profile-sidebar")
+    return RichTextPage.objects.filter(keywords__keyword__slug="profile sidebar")
 
 def get_artigo_final(articles):
     return ({"id": a.id, "name": os.path.basename(str(a.doc))} for a in articles)
