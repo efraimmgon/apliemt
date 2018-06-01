@@ -239,6 +239,9 @@ def get_portfolio_item_by_title(request, title):
 def get_EPI(s):
     return RichTextPage.objects.filter(title_pt_br__icontains=s).first()
 
+def get_profile_sidebar():
+    return RichTextPage.objects.filter(keywords__keyword__slug="profile-sidebar")
+
 def get_artigo_final(articles):
     return ({"id": a.id, "name": os.path.basename(str(a.doc))} for a in articles)
 
@@ -280,8 +283,7 @@ def profile(request, username, template="accounts/account_profile.html",
     xtra_context = {
         "informativos": get_portfolio_item_by_title(request, "Informativos"),
          "cronograma": get_portfolio_item_by_title(request, "Cronograma"),
-         "XIX_EPI": get_EPI("XIX EPI"),
-         "XX_EPI": get_EPI("XX EPI")
+         "profile-sidebar": get_profile_sidebar()
     }
     context.update(xtra_context)
     return TemplateResponse(request, template, context)

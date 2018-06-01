@@ -28,7 +28,7 @@
 
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->    
+<![endif]-->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
@@ -42,13 +42,13 @@
 <script type="text/javascript" src="{% static 'js/jquery.jcarousel.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/myscript.js' %}"></script>
 <script type="text/javascript">
-	$(document).ready(function(){   
+	$(document).ready(function(){
 		//Slider
 		$('#camera_wrap_1').camera();
-		
+
 		//Featured works & latest posts
-		$('#mycarousel, #mycarousel2, #newscarousel').jcarousel();                                                  
-	});     
+		$('#mycarousel, #mycarousel2, #newscarousel').jcarousel();
+	});
 </script>
 {% block extra_js %}{% endblock %}
 {% endcompress %}
@@ -65,10 +65,12 @@
 			<div class="navbar navbar_ clearfix">
 				<div class="container">
 					<div class="row">
-						<div class="span4">
-							<div class="logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>                        
+						<div class="span12 pagination-centered">
+							<div class="logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>
 						</div>
-						<div class="span8">
+					</div>
+					<div class="row">
+						<div class="span12">
 							<div class="follow_us">
 								<ul>
 								{% if settings.SOCIAL_LINK_FACEBOOK %}
@@ -93,14 +95,14 @@
 								<div class="menu_wrap">
 									{% page_menu "pages/menus/dropdown.html" %}
 								</div>
-							 </nav>                            
+							 </nav>
 						</div>
-					</div>                
+					</div>
 				</div>
 			 </div>
-		</div>    
+		</div>
 	</div>
-	<!--//header-->    
+	<!--//header-->
 
 {% block all_content %}
 <!--page_container-->
@@ -125,7 +127,7 @@
 				<div class="span8">
 
 					{% block main %}{% endblock %}
-					
+
 				</div>
 				{% endblock %}
 				{% block right_wrapper %}
@@ -142,7 +144,7 @@
 </div>
 <!--//page_container-->
 {% endblock %}
-	
+
 	<!--footer-->
 	<div id="footer">
 		<div class="footer_bottom">
@@ -150,15 +152,15 @@
 				<div class="container">
 					<div class="row">
 						<div class="span5">
-							<div class="foot_logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>    
-							<div class="copyright">&copy; {% now "Y" %} APLIEMT. {% trans "All rights reserved." %}</div>                        
+							<div class="foot_logo"><a href="/">{{ settings.SITE_TITLE }}</a></div>
+							<div class="copyright">&copy; {% now "Y" %} APLIEMT. {% trans "All rights reserved." %}</div>
 						</div>
 						<div class="span7">
 							<div class="foot_right_block">
 								<div>
 									<div class="inline">
 										<form action="{% url 'search' %}" method="get">
-											<input class="inp_search" name="q" type="text" value="{% trans 'Search the Site' %}" onfocus="if (this.value == '{% trans 'Search the Site' %}') this.value = '';" onblur="if (this.value == '') this.value = '{% trans 'Search the Site' %}';" />                                        
+											<input class="inp_search" name="q" type="text" value="{% trans 'Search the Site' %}" onfocus="if (this.value == '{% trans 'Search the Site' %}') this.value = '';" onblur="if (this.value == '') this.value = '{% trans 'Search the Site' %}';" />
 										</form>
 									</div>
 									<div class="inline">
@@ -168,18 +170,18 @@
 									</div>
 								</div>
 								<div class="clear"></div>
-							
+
 								<div class="foot_menu">
 									{% page_menu "pages/menus/footer.html" %}
 								</div>
-							</div>                            
+							</div>
 						</div>
-					</div>  
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--//footer-->    
+	<!--//footer-->
 
 {% block footer_js %}
 {% include "includes/footer_scripts.html" %}

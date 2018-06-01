@@ -76,7 +76,14 @@
     <!-- right -->
     <div class="span6">
 
+      {% for page in profile-sidebar %}
       <div>
+        <h3>{{ page.title }}</h3>
+        <div>
+          <p>{% page_menu page "pages/menus/tree.html" %}</p>
+        </div>
+      </div>
+      <!-- <div>
         {% if XX_EPI %}
         <h3>XX EPI</h3>
         <div>
@@ -88,7 +95,8 @@
             <p> {% page_menu XIX_EPI "pages/menus/tree.html" %}</p>
         </div>
         {% endif %}
-      </div>
+      </div> -->
+      {% endfor %}
 
     </div>
   </div>
