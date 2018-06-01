@@ -283,7 +283,7 @@ def profile(request, username, template="accounts/account_profile.html",
     xtra_context = {
         "informativos": get_portfolio_item_by_title(request, "Informativos"),
          "cronograma": get_portfolio_item_by_title(request, "Cronograma"),
-         "profile-sidebar": get_profile_sidebar()
+         "profile_sidebar": get_profile_sidebar()
     }
     context.update(xtra_context)
     return TemplateResponse(request, template, context)
